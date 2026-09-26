@@ -10,170 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;500;600;700&display=swap">
 
 
-<style>
-:root{
-  --ground:#F4F2EF; --surface:#FFFFFF; --surface-2:#ECE8E2; --line:#D9D3CB;
-  --ink:#23262B; --ink-2:#565B63; --muted:#7C8189;
-  --burg:#7D1D35; --burg-deep:#4E1121; --rose:#B4405C; --rose-soft:#F1DDE2; --river:#4F6B80;
-  --on-burg:#FBF7F4; --focus:#B4405C;
-  --font-display:"Newsreader",Georgia,"Times New Roman",serif;
-  --font-body:"Source Sans 3","Source Sans Pro",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --ground:#17181B; --surface:#1F2125; --surface-2:#2A2C31; --line:#3A3D44;
-    --ink:#ECE9E4; --ink-2:#BDB8B0; --muted:#8E9199;
-    --burg:#9A2C48; --burg-deep:#3B0D1A; --rose:#D0627C; --rose-soft:#3A2028; --river:#7E9BB0;
-    --on-burg:#FBF7F4; --focus:#D0627C;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --ground:#17181B; --surface:#1F2125; --surface-2:#2A2C31; --line:#3A3D44;
-  --ink:#ECE9E4; --ink-2:#BDB8B0; --muted:#8E9199;
-  --burg:#9A2C48; --burg-deep:#3B0D1A; --rose:#D0627C; --rose-soft:#3A2028; --river:#7E9BB0;
-  --on-burg:#FBF7F4; --focus:#D0627C;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:1.1;margin:0;text-wrap:balance;letter-spacing:-.01em}
-h2{font-size:clamp(30px,4vw,40px)}
-h3{font-size:24px}
-p{margin:0}
-a{color:var(--burg);text-decoration-thickness:1px;text-underline-offset:3px}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
-.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
-.lede{font-size:20px;color:var(--ink-2);max-width:62ch}
-.measure{max-width:65ch}
-section.block{padding-block:72px}
-section.block + section.block{border-top:1px solid var(--line)}
-.stack{display:grid;gap:14px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:6px;font-weight:600;font-size:16px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;font-family:inherit;line-height:1.2}
-.btn-primary{background:var(--burg);color:var(--on-burg);border-color:var(--burg)}
-.btn-primary:hover{background:var(--burg-deep);border-color:var(--burg-deep)}
-.btn-ghost{background:transparent;color:var(--burg);border-color:var(--burg)}
-.btn-ghost:hover{background:var(--rose-soft)}
-.btn-light{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.55);backdrop-filter:blur(4px)}
-.btn-light:hover{background:rgba(255,255,255,.26)}
-
-/* nav */
-.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;gap:22px;height:58px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--font-display);font-size:21px;font-weight:600;letter-spacing:-.01em;margin-right:auto;white-space:nowrap}
-.brand .vc{width:30px;height:30px;border-radius:50%;background:var(--burg);color:var(--on-burg);display:grid;place-items:center;font-family:var(--font-display);font-size:14px;font-weight:600;letter-spacing:.02em}
-.nav-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
-.nav-links::-webkit-scrollbar{display:none}
-.nav-links a{color:var(--ink-2);text-decoration:none;font-weight:600;font-size:14.5px;padding:8px 10px;border-radius:5px;white-space:nowrap}
-.nav-links a:hover{color:var(--burg);background:var(--rose-soft)}
-
-/* hero */
-.hero{position:relative;isolation:isolate;color:#fff;background:var(--burg-deep);min-height:min(78vh,640px);display:flex;align-items:flex-end}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(35,20,26,.15) 0%,rgba(35,20,26,.25) 45%,rgba(60,18,32,.86) 100%)}
-.hero .wrap{padding-block:56px 44px;display:grid;gap:18px;width:100%}
-.hero .eyebrow{color:#F3C9D3}
-.hero h1{font-size:clamp(44px,7vw,86px);font-weight:500;max-width:12ch}
-.hero h1 em{font-style:italic;font-weight:400}
-.hero p{font-size:clamp(18px,2.2vw,22px);max-width:52ch;color:#F6E9EC}
-.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
-
-/* intro strip */
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px 28px;margin-top:34px}
-.pillar{display:grid;gap:6px;padding-top:14px;border-top:2px solid var(--burg)}
-.pillar strong{font-family:var(--font-display);font-size:21px;font-weight:500}
-.pillar span{color:var(--ink-2);font-size:15.5px}
-
-/* roster */
-.roster-panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px;display:grid;gap:22px;margin-top:28px;box-shadow:0 1px 0 rgba(0,0,0,.03)}
-.finder{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:end}
-.finder label{display:grid;gap:6px;font-weight:600;font-size:14px;color:var(--ink-2)}
-.finder input{font:inherit;font-family:var(--font-display);font-size:34px;font-weight:500;padding:6px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--ground);color:var(--ink);width:150px;font-variant-numeric:tabular-nums}
-.finder input[type=text]{font-family:var(--font-body);font-size:18px;font-weight:400;width:100%;padding:12px 14px}
-.finder input:focus{border-color:var(--burg)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid var(--line);background:var(--ground);color:var(--ink-2);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
-.chip:hover,.chip[aria-pressed=true]{background:var(--burg);color:var(--on-burg);border-color:var(--burg)}
-.results{display:grid;gap:26px}
-.class-group{display:grid;gap:10px}
-.class-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.class-head h3{font-size:22px}
-.class-head.pinned h3{font-size:30px;color:var(--burg)}
-.class-head .count{color:var(--muted);font-size:14px;font-weight:600}
-.names{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 18px;margin:0;padding:0;list-style:none}
-.names li{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dotted var(--line);font-size:16.5px}
-.names .nm{flex:1;min-width:0}
-.names .alt{color:var(--muted);font-size:14px}
-.tag{font-size:11px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:4px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
-.tag.side{background:var(--rose-soft);color:var(--burg)}
-.tag.stu{background:color-mix(in srgb,var(--river) 18%,transparent);color:var(--river)}
-.roster-note{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:16px 18px;border-radius:8px;background:var(--rose-soft);color:var(--ink)}
-.roster-note p{max-width:60ch}
-.empty{color:var(--muted);padding:12px 0}
-
-/* photos */
-.mosaic{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:150px;gap:10px;margin-top:28px}
-.mosaic figure{margin:0;position:relative;overflow:hidden;border-radius:8px;background:var(--surface-2)}
-.mosaic img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.mosaic figure:hover img{transform:scale(1.03)}
-.mosaic figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;font-size:13px;color:#fff;background:linear-gradient(180deg,transparent,rgba(30,12,18,.75))}
-.m-a{grid-column:span 3;grid-row:span 2}.m-b{grid-column:span 3}.m-c{grid-column:span 2}.m-d{grid-column:span 1}.m-e{grid-column:span 2}.m-f{grid-column:span 2;grid-row:span 2}.m-g{grid-column:span 2}.m-h{grid-column:span 2}
-@media (max-width:760px){.mosaic{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}.mosaic figure{grid-column:span 1 !important;grid-row:span 1 !important}.m-a{grid-column:span 2 !important}}
-
-/* events */
-.events{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:28px}
-.event{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;display:grid;gap:10px;align-content:start}
-.event .when{font-family:var(--font-display);font-size:22px;color:var(--burg)}
-.event .when.tbd{color:var(--muted);font-style:italic}
-.event h3{font-size:22px}
-.event p{color:var(--ink-2);font-size:15.5px}
-.recap{margin-top:40px;display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center}
-.recap img{border-radius:10px;aspect-ratio:4/3;object-fit:cover;width:100%}
-@media (max-width:760px){.recap{grid-template-columns:1fr}}
-
-/* give */
-.give{background:var(--burg);color:var(--on-burg)}
-.give .eyebrow{color:#F3C9D3}
-.give .lede{color:#F1DEE3}
-.give a{color:#fff}
-.give-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:30px}
-.give-card{border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:24px;display:grid;gap:12px;align-content:start;background:rgba(255,255,255,.06)}
-.give-card h3{color:#fff}
-.give-card p{color:#F1DEE3;font-size:15.5px}
-.give .btn-light{margin-top:6px;justify-self:start}
-.fine{font-size:14px;color:#E3C9D0;max-width:70ch;margin-top:26px}
-
-/* history */
-.history{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start;margin-top:26px}
-.history img{border-radius:8px}
-.history .measure{font-size:17.5px}
-.history .measure p + p{margin-top:14px}
-@media (max-width:760px){.history{grid-template-columns:1fr}}
-
-/* who */
-.committees{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:26px;padding:0;list-style:none}
-.committees li{padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-weight:600;font-size:15px}
-
-/* update form */
-.form{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px;margin-top:26px;display:grid;gap:16px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-@media (max-width:640px){.grid2,.grid3{grid-template-columns:1fr}}
-.form label{display:grid;gap:5px;font-size:14px;font-weight:600;color:var(--ink-2)}
-.form input,.form select,.form textarea{font:inherit;padding:10px 12px;border:1.5px solid var(--line);border-radius:6px;background:var(--ground);color:var(--ink);width:100%}
-.form textarea{min-height:90px;resize:vertical}
-.out{display:none;gap:10px;background:var(--ground);border:1px dashed var(--line);border-radius:8px;padding:16px}
-.out.show{display:grid}
-.out pre{white-space:pre-wrap;font-family:inherit;margin:0;font-size:15px;color:var(--ink-2)}
-.privacy{font-size:14px;color:var(--muted);max-width:70ch}
-
-footer{padding-block:40px 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14.5px}
-footer .wrap{display:grid;gap:8px}
-@media (max-width:640px){.finder{grid-template-columns:1fr}.finder input{width:100%}section.block{padding-block:52px}}
-@media (prefers-reduced-motion:reduce){.mosaic img{transition:none}}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -181,7 +18,7 @@ footer .wrap{display:grid;gap:8px}
   <div class="wrap">
     <a class="brand" href="#top"><span class="vc" aria-hidden="true">VC</span>Vassar Rowing</a>
     <div class="nav-links">
-      <a href="#rosters">Rosters</a><a href="#events">Events</a><a href="#photos">Photos</a><a href="#give">Give</a><a href="#history">History</a><a href="#who">Who we are</a><a href="#update">Update my info</a>
+      <a href="#rosters">Rosters</a><a href="#events">Events</a><a href="#program">The Team</a><a href="#photos">Photos</a><a href="#give">Give</a><a href="#history">History</a><a href="#who">Who we are</a><a href="#update">Update my info</a>
     </div>
   </div>
 </nav>
@@ -203,12 +40,12 @@ footer .wrap{display:grid;gap:8px}
   <div class="wrap">
     <span class="eyebrow">What this is</span>
     <h2 style="margin-top:10px">An alumni effort, organized by rowers, for the program</h2>
-    <p class="lede" style="margin-top:14px">Vassar Rowing alumni have come together to strengthen the team for the long run. The work is simple to describe and takes a lot of hands: stay connected, show up once a year, give on Brewer Day, and build an endowment that funds coaching for decades.</p>
+    <p class="lede" style="margin-top:14px">Vassar Rowing alumni coming together to strengthen the team for the long row. The work, like a shell, is lighter with &ldquo;All Hands On&rdquo;: Stay connected; Attend the Annual Alum Rowing Regatta; Give on Brewer Day; &amp; Build an Endowment that supports the VC Rowing legacy.</p>
     <div class="pillars">
-      <div class="pillar"><strong>Stay connected</strong><span>A living roster of everyone who rowed here, by class year, so no one loses track of their boat.</span></div>
-      <div class="pillar"><strong>Row together</strong><span>The fall alumni regatta, launched in 2025, brings alumni and the current team onto the same water.</span></div>
+      <div class="pillar"><strong>Stay Connected</strong><span>A living roster of everyone who rowed here, by class year, so no one loses track of their boat.</span></div>
+      <div class="pillar"><strong>Row Together</strong><span>The fall alumni regatta, launched in 2025, brings alumni and the current team onto the same water.</span></div>
       <div class="pillar"><strong>Brewer Day</strong><span>Class cohorts rally each other for Vassar's day of giving. Friendly rivalry, real dollars for the team.</span></div>
-      <div class="pillar"><strong>The endowment</strong><span>A permanent fund whose annual draw pays for coaching capacity the program has never had.</span></div>
+      <div class="pillar"><strong>The Endowment</strong><span>A permanent fund whose annual draw pays for coaching capacity the program has never had.</span></div>
     </div>
   </div>
 </section>
@@ -245,6 +82,18 @@ footer .wrap{display:grid;gap:8px}
       <div class="event"><span class="when tbd">Details to come</span><h3>Reunion weekend row</h3><p>If your class is back on campus, we'll try to get a boat out. Tell us you're coming through the update form below.</p></div>
     </div>
 
+    <div class="live" id="live">
+      <div class="live-col">
+        <div class="live-head"><span class="eyebrow">Team schedule</span><a href="https://www.vassarathletics.com/sports/womens-rowing/schedule" target="_blank" rel="noopener">Women's</a> &middot; <a href="https://www.vassarathletics.com/sports/mens-rowing/schedule" target="_blank" rel="noopener">Men's</a></div>
+        <ul class="feed" id="feed-events"><li class="feed-empty">Loading the schedule from Vassar Athletics&hellip;</li></ul>
+      </div>
+      <div class="live-col">
+        <div class="live-head"><span class="eyebrow">Latest news</span><a href="https://www.vassarathletics.com/sports/mens-rowing/archives" target="_blank" rel="noopener">Archive</a></div>
+        <ul class="feed" id="feed-news"><li class="feed-empty">Loading news from Vassar Athletics&hellip;</li></ul>
+      </div>
+    </div>
+    <p class="privacy" id="feed-stamp"></p>
+
     <div class="recap">
       <img src="photos/team-table.jpg" alt="Current team members and an alumna gathered around a table looking at an old photo book outside the boathouse">
       <div class="stack">
@@ -252,6 +101,20 @@ footer .wrap{display:grid;gap:8px}
         <h3>Alumni Regatta, fall 2025</h3>
         <p class="measure" style="color:var(--ink-2)">The first alumni regatta brought graduates from across the decades back to the boathouse to row with the current team, pull on the ergs, and swap stories. Recap and full gallery coming soon.</p>
         <a href="#photos">See photos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="program">
+  <div class="wrap">
+    <span class="eyebrow">The program today</span>
+    <h2 style="margin-top:10px">This is Vassar Rowing</h2>
+    <div class="program">
+      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/zP0qFWwcMtM" title="This is Vassar Rowing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <div class="stack">
+        <p class="measure" style="color:var(--ink-2)">Men's and women's squads train out of the boathouse on the Hudson and race a fall head-race season and a spring sprint season. The team is coached by Peter Wells.</p>
+        <p><a href="https://www.vassarathletics.com/sports/mens-rowing/roster/coaches/peter-wells/1893" target="_blank" rel="noopener">Coach Wells's bio</a> &middot; <a href="https://www.vassarathletics.com/sports/womens-rowing/roster" target="_blank" rel="noopener">Women's roster</a> &middot; <a href="https://www.vassarathletics.com/sports/mens-rowing/roster" target="_blank" rel="noopener">Men's roster</a></p>
       </div>
     </div>
   </div>
@@ -281,8 +144,9 @@ footer .wrap{display:grid;gap:8px}
     <h2 style="margin-top:10px">Two ways to help the team</h2>
     <p class="lede" style="margin-top:14px">Every gift goes through Vassar. Gifts to rowing add to what the College already does for the program; they never replace it.</p>
     <div class="give-grid">
-      <div class="give-card"><h3>Brewer Day</h3><p>Vassar's annual day of giving. Give to rowing, then get your class to do the same. Cohort captains keep score by decade.</p><a class="btn btn-light" href="#give">Give on Brewer Day (link to come)</a></div>
-      <div class="give-card"><h3>The Rowing Endowment</h3><p>A permanent endowed fund at Vassar. The annual draw funds additional coaching for the program. Multi-year pledges are welcome.</p><a class="btn btn-light" href="#give">Learn about the endowment (link to come)</a></div>
+      <div class="give-card"><h3>Brewer Day Challenge</h3><p>Vassar Athletics' day of giving, coming in early October 2026. Give to rowing, then get your class to do the same. In 2025, rowing finished third among all teams in dollars raised and second in number of gifts. Let's take first in both.</p><p><a href="https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2025" target="_blank" rel="noopener">See the 2025 results</a> &middot; 2026 giving link posted here when it opens</p></div>
+      <div class="give-card"><h3>Give to Vassar Rowing today</h3><p>Any day of the year, a gift designated to rowing goes straight to the program through Vassar's online giving page.</p><a class="btn btn-light" href="https://engage.vassar.edu/portal/online-giving-athletics?sys:gift:appeal=1588dc64-9080-dd3f-c507-9b34800c20a1" target="_blank" rel="noopener">Give to rowing now</a></div>
+      <div class="give-card"><h3>The Rowing Endowment</h3><p>A permanent endowed fund at Vassar. The annual draw funds additional coaching for the program. Multi-year pledges are welcome. Details and the giving link are coming.</p></div>
     </div>
     <p class="fine">Questions about a gift, a pledge, or giving stock or from a donor-advised fund? Vassar's Advancement office handles all of it, and we'll connect you.</p>
   </div>
@@ -356,84 +220,7 @@ footer .wrap{display:grid;gap:8px}
 </footer>
 
 <script src="roster.js"></script>
-<script>
-(function(){
-  const R = window.ROSTER || [];
-  const results = document.getElementById('results');
-  const yearEl = document.getElementById('year');
-  const qEl = document.getElementById('q');
-  const decades = document.getElementById('decades');
-  const SIDE = {P:'Port',S:'Starboard',C:'Cox',B:'Port/Starboard'};
-  const SQ = {M:"Men's",W:"Women's"};
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-  function nameHTML(p){
-    let n = esc(p.f) + ' ' + esc(p.l);
-    const alt = [];
-    if (p.p) alt.push('goes by ' + esc(p.p));
-    if (p.x) alt.push('née ' + esc(p.x));
-    let tags = '';
-    if (p.q) tags += '<span class="tag">' + SQ[p.q] + '</span>';
-    if (p.s) tags += '<span class="tag side">' + SIDE[p.s] + '</span>';
-    if (p.t === 'S') tags += '<span class="tag stu">Current team</span>';
-    return '<li><span class="nm">' + n + (alt.length ? ' <span class="alt">(' + alt.join(', ') + ')</span>' : '') + '</span>' + tags + '</li>';
-  }
-  function group(year, pinned){
-    const ppl = R.filter(p => p.y === year).sort((a,b)=> a.l.localeCompare(b.l) || a.f.localeCompare(b.f));
-    if (!ppl.length) return '';
-    return '<div class="class-group"><div class="class-head' + (pinned?' pinned':'') + '"><h3>Class of ' + year + '</h3><span class="count">' + ppl.length + (ppl.length===1?' person':' people') + '</span></div><ul class="names">' + ppl.map(nameHTML).join('') + '</ul></div>';
-  }
-  function showYear(y){
-    if (!y || y < 1900 || y > 2035) { results.innerHTML = ''; return; }
-    let html = group(y, true) || '<div class="class-group"><div class="class-head pinned"><h3>Class of ' + y + '</h3></div><p class="empty">We don\'t have anyone listed for ' + y + ' yet. If that\'s your class, you can be the first.</p></div>';
-    const near = [];
-    for (let d = 1; d <= 3; d++) { near.push(y - d); near.push(y + d); }
-    const nearHTML = near.sort((a,b)=>a-b).map(yy => group(yy, false)).join('');
-    if (nearHTML) html += '<div class="class-group"><span class="eyebrow">Nearby classes · ' + (y-3) + ' to ' + (y+3) + '</span></div>' + nearHTML;
-    results.innerHTML = html;
-    document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(Math.floor(y/10)*10 === +c.dataset.d)));
-  }
-  function showSearch(q){
-    q = q.trim().toLowerCase();
-    if (q.length < 2) { results.innerHTML = ''; return; }
-    const hits = R.filter(p => (p.f + ' ' + p.l + ' ' + (p.p||'') + ' ' + (p.x||'')).toLowerCase().includes(q)).sort((a,b)=> a.l.localeCompare(b.l) || a.y - b.y);
-    results.innerHTML = hits.length
-      ? '<div class="class-group"><div class="class-head"><h3>' + hits.length + ' match' + (hits.length===1?'':'es') + '</h3></div><ul class="names">' + hits.map(p => nameHTML(p).replace('</span>', ' <span class="alt">\'' + String(p.y).slice(2) + '</span></span>')).join('') + '</ul></div>'
-      : '<p class="empty">No one by that name yet. Add them below.</p>';
-  }
-  const years = R.map(p=>p.y);
-  const minD = Math.floor(Math.min.apply(null, years)/10)*10, maxD = Math.floor(Math.max.apply(null, years)/10)*10;
-  for (let d = minD; d <= maxD; d += 10) {
-    const b = document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.d = d; b.setAttribute('aria-pressed','false');
-    const n = R.filter(p => p.y >= d && p.y < d+10).length;
-    b.textContent = d + 's · ' + n;
-    b.addEventListener('click', () => { qEl.value=''; yearEl.value = d; showYear(d); });
-    decades.appendChild(b);
-  }
-  yearEl.addEventListener('input', () => { qEl.value=''; if (yearEl.value.length === 4) showYear(+yearEl.value); });
-  qEl.addEventListener('input', () => { yearEl.value=''; showSearch(qEl.value); });
-  showYear(2002);
-
-  // update form → prepared email text (the live site will post to a form service instead)
-  const f = document.getElementById('f'), out = document.getElementById('out'), body = document.getElementById('body');
-  const v = id => document.getElementById(id).value.trim();
-  f.addEventListener('submit', e => {
-    e.preventDefault();
-    const lines = ['Vassar Rowing roster update', '',
-      'Name: ' + v('f-name'), 'Class year: ' + v('f-year'), 'Squad: ' + v('f-squad'), 'Side: ' + v('f-side'),
-      'Seasons rowed: ' + v('f-seasons'), 'Email: ' + v('f-email'), 'Phone: ' + v('f-phone'), '', v('f-note')];
-    const txt = lines.join('\n');
-    body.textContent = txt;
-    document.getElementById('mailto').href = 'mailto:' + document.getElementById('addr').textContent + '?subject=' + encodeURIComponent('Roster update – Class of ' + v('f-year')) + '&body=' + encodeURIComponent(txt);
-    out.classList.add('show'); out.scrollIntoView({behavior:'smooth', block:'nearest'});
-  });
-  document.getElementById('copy').addEventListener('click', function(){
-    const btn = this;
-    navigator.clipboard.writeText(body.textContent).then(()=>{ btn.textContent='Copied'; setTimeout(()=>btn.textContent='Copy text',1500); })
-      .catch(()=>{ const r=document.createRange(); r.selectNodeContents(body); const s=getSelection(); s.removeAllRanges(); s.addRange(r); });
-  });
-})();
-</script>
+<script src="site.js"></script>
 
 </body>
 </html>
