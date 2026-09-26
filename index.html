@@ -18,7 +18,7 @@
   <div class="wrap">
     <a class="brand" href="#top"><span class="vc" aria-hidden="true">VC</span>Vassar Rowing</a>
     <div class="nav-links">
-      <a href="#rosters">Rosters</a><a href="#events">Events</a><a href="regattas.html">Alumni Regattas</a><a href="#program">The Team</a><a href="#photos">Photos</a><a href="#give">Give</a><a href="history.html">History</a><a href="#who">Who we are</a><a href="#update">Update my info</a>
+      <a href="#events">Events</a><a href="#give">Give</a><a href="#program">The Team</a><a href="#rosters">Rosters</a><a href="regattas.html">Alumni Regattas</a><a href="#photos">Photos</a><a href="history.html">History</a><a href="#who">Volunteer</a><a href="#update">Update my info</a>
     </div>
   </div>
 </nav>
@@ -49,28 +49,6 @@
       <div class="pillar"><strong>Row Together</strong><span>The fall alumni regatta, launched in 2025, brings alumni and the current team onto the same water.</span></div>
       <div class="pillar"><strong>Brewer Day</strong><span>Class cohorts rally each other for Vassar's day of giving. Friendly rivalry, real dollars for the team.</span></div>
       <div class="pillar"><strong>The Endowment</strong><span>A permanent fund whose annual draw pays for coaching capacity the program has never had.</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="block" id="rosters">
-  <div class="wrap">
-    <span class="eyebrow">Rosters</span>
-    <h2 style="margin-top:10px">Who was in your boat?</h2>
-    <p class="lede" style="margin-top:14px">Enter your class year. You'll see your class first, then the classes on either side of it, the people you shared launches, ergs, and long bus rides with.</p>
-
-    <div class="roster-panel">
-      <div class="finder">
-        <label for="year">Class year<input id="year" type="number" inputmode="numeric" min="1900" max="2035" placeholder="2002" aria-describedby="year-help"></label>
-        <label for="q">Or search a name<input id="q" type="text" placeholder="Last name, first name, or a maiden name"></label>
-      </div>
-      <div class="chips" id="decades" aria-label="Jump to a decade"></div>
-      <p id="year-help" class="privacy">Listing shows name, class year, and squad and side where we know them. No contact details are ever published here.</p>
-      <div class="results" id="results"></div>
-      <div class="roster-note">
-        <p><strong>Not on the list, or something's wrong?</strong> Names, class years, and sides come from an old spreadsheet and the current team roster, so there are gaps. Tell us and we'll fix it.</p>
-        <a class="btn btn-primary" href="#update">Send an update</a>
-      </div>
     </div>
   </div>
 </section>
@@ -109,6 +87,20 @@
   </div>
 </section>
 
+<section class="block give" id="give">
+  <div class="wrap">
+    <span class="eyebrow">Give</span>
+    <h2 style="margin-top:10px">Three ways to help the team</h2>
+    <p class="lede" style="margin-top:14px">Every gift goes through Vassar. Gifts to rowing add to what the College already does for the program; they never replace it.</p>
+    <div class="give-grid">
+      <div class="give-card"><h3>Brewer Day Challenge</h3><p>Vassar Athletics' day of giving, coming in early October 2026. Give to rowing, then get your class to do the same. In 2025, rowing finished third among all teams in dollars raised and second in number of gifts. Let's take first in both.</p><p><a href="https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2025" target="_blank" rel="noopener">See the 2025 results</a> &middot; 2026 giving link posted here when it opens</p></div>
+      <div class="give-card"><h3>Give to Vassar Rowing today</h3><p>Any day of the year, a gift designated to rowing goes straight to the program through Vassar's online giving page.</p><a class="btn btn-light" href="https://engage.vassar.edu/portal/online-giving-athletics?sys:gift:appeal=1588dc64-9080-dd3f-c507-9b34800c20a1" target="_blank" rel="noopener">Give to rowing now</a></div>
+      <div class="give-card"><h3>The Rowing Endowment</h3><p>A permanent endowed fund at Vassar. The annual draw funds additional coaching for the program. Multi-year pledges are welcome. Details and the giving link are coming.</p></div>
+    </div>
+    <p class="fine">Questions about a gift, a pledge, or giving stock or from a donor-advised fund? Vassar's Advancement office handles all of it, and we'll connect you.</p>
+  </div>
+</section>
+
 <section class="block" id="program">
   <div class="wrap">
     <span class="eyebrow">The program today</span>
@@ -118,6 +110,28 @@
       <div class="stack">
         <p class="measure" style="color:var(--ink-2)">Men's and women's squads train out of the boathouse on the Hudson and race a fall head-race season and a spring sprint season. The team is coached by Peter Wells.</p>
         <p><a href="https://www.vassarathletics.com/sports/mens-rowing/roster/coaches/peter-wells/1893" target="_blank" rel="noopener">Coach Wells's bio</a> &middot; <a href="https://www.vassarathletics.com/sports/womens-rowing/roster" target="_blank" rel="noopener">Women's roster</a> &middot; <a href="https://www.vassarathletics.com/sports/mens-rowing/roster" target="_blank" rel="noopener">Men's roster</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="rosters">
+  <div class="wrap">
+    <span class="eyebrow">Rosters</span>
+    <h2 style="margin-top:10px">Who was in your boat?</h2>
+    <p class="lede" style="margin-top:14px">Enter your class year. Your class opens first; the classes on either side of it, the people you shared launches, ergs, and long bus rides with, sit just below. Tap a class to open or close it.</p>
+
+    <div class="roster-panel">
+      <div class="finder">
+        <label for="year">Class year<input id="year" type="number" inputmode="numeric" min="1900" max="2035" placeholder="2002" aria-describedby="year-help"></label>
+        <label for="q">Or search a name<input id="q" type="text" placeholder="Last name, first name, or a maiden name"></label>
+      </div>
+      <div class="chips" id="decades" aria-label="Jump to a decade"></div>
+      <p id="year-help" class="privacy">Listing shows name, class year, and squad and side where we know them. No contact details are ever published here.</p>
+      <div class="results" id="results"></div>
+      <div class="roster-note">
+        <p><strong>Not on the list, or something's wrong?</strong> Names, class years, and sides come from an old spreadsheet and the current team roster, so there are gaps. Tell us and we'll fix it.</p>
+        <a class="btn btn-primary" href="#update">Send an update</a>
       </div>
     </div>
   </div>
@@ -138,20 +152,6 @@
       <figure class="m-g"><img src="photos/eight-shoreline.jpg" alt="An eight passing the Poughkeepsie shoreline" loading="lazy"><figcaption>Past the shoreline</figcaption></figure>
       <figure class="m-h"><img src="photos/oar-night.jpg" alt="An oar on the ground under the boathouse lights at night" loading="lazy"><figcaption>After dark</figcaption></figure>
     </div>
-  </div>
-</section>
-
-<section class="block give" id="give">
-  <div class="wrap">
-    <span class="eyebrow">Give</span>
-    <h2 style="margin-top:10px">Three ways to help the team</h2>
-    <p class="lede" style="margin-top:14px">Every gift goes through Vassar. Gifts to rowing add to what the College already does for the program; they never replace it.</p>
-    <div class="give-grid">
-      <div class="give-card"><h3>Brewer Day Challenge</h3><p>Vassar Athletics' day of giving, coming in early October 2026. Give to rowing, then get your class to do the same. In 2025, rowing finished third among all teams in dollars raised and second in number of gifts. Let's take first in both.</p><p><a href="https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2025" target="_blank" rel="noopener">See the 2025 results</a> &middot; 2026 giving link posted here when it opens</p></div>
-      <div class="give-card"><h3>Give to Vassar Rowing today</h3><p>Any day of the year, a gift designated to rowing goes straight to the program through Vassar's online giving page.</p><a class="btn btn-light" href="https://engage.vassar.edu/portal/online-giving-athletics?sys:gift:appeal=1588dc64-9080-dd3f-c507-9b34800c20a1" target="_blank" rel="noopener">Give to rowing now</a></div>
-      <div class="give-card"><h3>The Rowing Endowment</h3><p>A permanent endowed fund at Vassar. The annual draw funds additional coaching for the program. Multi-year pledges are welcome. Details and the giving link are coming.</p></div>
-    </div>
-    <p class="fine">Questions about a gift, a pledge, or giving stock or from a donor-advised fund? Vassar's Advancement office handles all of it, and we'll connect you.</p>
   </div>
 </section>
 
@@ -190,7 +190,7 @@
           <label>Class Year<input id="v-year" type="number" inputmode="numeric" placeholder="2002"></label>
           <label>Email<input id="v-email" type="email" autocomplete="email"></label>
         </div>
-        <fieldset class="checks" id="v-checks"><legend>Committees I'd join</legend></fieldset>
+        <fieldset class="checks grid-3x3" id="v-checks"><legend>Committees I'd join</legend></fieldset>
         <label>Anything Else<textarea id="v-note" placeholder="What you'd like to help with, or that you'd captain your decade for Brewer Day"></textarea></label>
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
           <button class="btn btn-primary" type="submit">Prepare my note</button>

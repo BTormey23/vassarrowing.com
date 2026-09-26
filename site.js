@@ -22,7 +22,7 @@
   function group(year, pinned){
     const ppl = R.filter(p => p.y === year).sort((a,b)=> a.l.localeCompare(b.l) || a.f.localeCompare(b.f));
     if (!ppl.length) return '';
-    return '<div class="class-group"><div class="class-head' + (pinned?' pinned':'') + '"><h3>Class of ' + year + '</h3><span class="count">' + ppl.length + (ppl.length===1?' person':' people') + '</span></div><ul class="names">' + ppl.map(nameHTML).join('') + '</ul></div>';
+    return '<details class="class-group"' + (pinned?' open':'') + '><summary class="class-head' + (pinned?' pinned':'') + '"><h3>Class of ' + year + '</h3><span class="count">' + ppl.length + (ppl.length===1?' person':' people') + '</span><span class="caret" aria-hidden="true"></span></summary><ul class="names">' + ppl.map(nameHTML).join('') + '</ul></details>';
   }
   function showYear(y){
     if (!y || y < 1900 || y > 2035) { results.innerHTML = ''; return; }
@@ -39,7 +39,7 @@
     if (q.length < 2) { results.innerHTML = ''; return; }
     const hits = R.filter(p => (p.f + ' ' + p.l + ' ' + (p.p||'') + ' ' + (p.x||'')).toLowerCase().includes(q)).sort((a,b)=> a.l.localeCompare(b.l) || a.y - b.y);
     results.innerHTML = hits.length
-      ? '<div class="class-group"><div class="class-head"><h3>' + hits.length + ' match' + (hits.length===1?'':'es') + '</h3></div><ul class="names">' + hits.map(p => nameHTML(p).replace('</span>', ' <span class="alt">\'' + String(p.y).slice(2) + '</span></span>')).join('') + '</ul></div>'
+      ? '<details class="class-group" open><summary class="class-head"><h3>' + hits.length + ' match' + (hits.length===1?'':'es') + '</h3><span class="caret" aria-hidden="true"></span></summary><ul class="names">' + hits.map(p => nameHTML(p).replace('</span>', ' <span class="alt">\'' + String(p.y).slice(2) + '</span></span>')).join('') + '</ul></details>'
       : '<p class="empty">No one by that name yet. Add them below.</p>';
   }
   const years = R.map(p=>p.y);
@@ -97,9 +97,9 @@
         + (members.length ? members.map(p => esc(p.f + ' ' + p.l) + ' \'' + String(p.y).slice(2)).join(', ') : 'Not yet announced. Raise your hand below.') + '</div></div>';
       div.addEventListener('click', () => div.classList.toggle('open'));
       cWrap.appendChild(div);
-      if (checks) { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="' + esc(name) + '"> ' + esc(name); checks.appendChild(lab); }
+      if (checks && code !== 'EB') { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="' + esc(name) + '"> <span>' + esc(name) + '</span>'; checks.appendChild(lab); }
     });
-    if (checks) { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="Cohort captain for my decade (Brewer Day)"> Cohort captain for my decade (Brewer Day)'; checks.appendChild(lab); }
+    if (checks) { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="Cohort captain for my decade (Brewer Day)"> <span>Cohort captain for my decade (Brewer Day)</span>'; checks.appendChild(lab); }
   }
   const vf = document.getElementById('vf');
   if (vf) {
