@@ -90,10 +90,13 @@ def events_from_classic(soup, squad, season):
         d = g.select_one(".sidearm-schedule-game-opponent-date")
         n = g.select_one(".sidearm-schedule-game-opponent-name")
         l = g.select_one(".sidearm-schedule-game-location")
-        t = g.select_one(".sidearm-schedule-game-time, .sidearm-schedule-game-opponent-text")
+        t = g.select_one(".sidearm-schedule-game-time")
         date = parse_date_guess(d.get_text(" ", strip=True), season) if d else None
+        time_ = t.get_text(" ", strip=True) if t else ""
+        if not re.search(r"\d{1,2}(:\d{2})?\s*(a|p)\.?m", time_, re.I) and "tba" not in time_.lower():
+            time_ = ""   # only keep values that look like a clock time or TBA
         if date and n:
-            out.append({"date": date, "time": (t.get_text(" ", strip=True) if t else ""), "name": n.get_text(" ", strip=True),
+            out.append({"date": date, "time": time_, "name": n.get_text(" ", strip=True),
                         "location": (l.get_text(" ", strip=True) if l else ""), "squad": squad})
     return out
 
