@@ -1,12 +1,147 @@
 {
- "updated": "2026-09-26T13:33:55+00:00",
- "events": [],
- "news": [
-  {"date": "2026-05-10", "title": "Men's Rowing Concludes Season At National Invitational Rowing Championships", "url": "https://vassarathletics.com/news/2026/5/10/mens-rowing-mens-rowing-concludes-season-at-national-invitational-rowing-championships.aspx", "squad": "Men's"},
-  {"date": "2026-05-09", "title": "Men's Varsity 8 Wins Bronze At Dad Vail Regatta", "url": "https://vassarathletics.com/news/2026/5/9/mens-rowing-mens-varsity-8-wins-bronze-at-dad-vail-regatta.aspx", "squad": "Men's"},
-  {"date": "2026-05-08", "title": "Varsity 8 Races Into Club/DIII Grand Final At Dad Vail Regatta", "url": "https://vassarathletics.com/news/2026/5/8/mens-rowing-varsity-8-races-into-club-diii-grand-final-at-dad-vail-regatta.aspx", "squad": "Men's"},
-  {"date": "2026-04-25", "title": "Varsity 8 Victorious At Northeast Collegiate Club Championships", "url": "https://vassarathletics.com/news/2026/4/25/mens-rowing-varsity-8-victorious-at-northeast-collegiate-club-championships.aspx", "squad": "Men's"},
-  {"date": "2026-04-18", "title": "Men's Varsity Eight Races To Runner-Up Finish At New York State Championships", "url": "https://vassarathletics.com/news/2026/4/18/mens-rowing-mens-varsity-eight-races-to-runner-up-finish-at-new-york-state-championships.aspx", "squad": "Men's"}
+ "updated": "2026-09-26T14:12:36+00:00",
+ "events": [
+  {
+   "date": "2026-10-04",
+   "time": "Head of the Riverfront",
+   "name": "Head of the Riverfront",
+   "location": "Hartford, CT",
+   "squad": "Men's & Women's"
+  },
+  {
+   "date": "2026-10-24",
+   "time": "Head of the Fish",
+   "name": "Head of the Fish",
+   "location": "Saratoga Springs, NY | Fish Creek",
+   "squad": "Men's & Women's"
+  }
  ],
- "debug": {"note": "seed file; replaced by the first Action run"}
+ "news": [
+  {
+   "date": "2026-05-10",
+   "title": "Men’s Rowing Concludes Season At National Invitational Rowing Championships",
+   "url": "https://vassarathletics.com/news/2026/5/10/mens-rowing-mens-rowing-concludes-season-at-national-invitational-rowing-championships.aspx",
+   "squad": "Men's"
+  },
+  {
+   "date": "2026-05-09",
+   "title": "Brewers Earn Silver Medal At Dad Vail Regatta",
+   "url": "https://vassarathletics.com/news/2026/5/9/womens-rowing-brewers-earn-silver-medal-at-dad-vail-regatta.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2026-05-09",
+   "title": "Men’s Varsity 8 Wins Bronze At Dad Vail Regatta",
+   "url": "https://vassarathletics.com/news/2026/5/9/mens-rowing-mens-varsity-8-wins-bronze-at-dad-vail-regatta.aspx",
+   "squad": "Men's"
+  },
+  {
+   "date": "2026-05-08",
+   "title": "Women’s Varsity 8 Wins Semifinal Heat, Races Into DIII Grand Final At Dad Vail Regatta",
+   "url": "https://vassarathletics.com/news/2026/5/8/womens-rowing-womens-varsity-8-wins-semifinal-heat-races-into-diii-grand-final-at-dad-vail-regatta.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2026-05-08",
+   "title": "Varsity 8 Races Into Club/DIII Grand Final At Dad Vail Regatta",
+   "url": "https://vassarathletics.com/news/2026/5/8/mens-rowing-varsity-8-races-into-club-diii-grand-final-at-dad-vail-regatta.aspx",
+   "squad": "Men's"
+  },
+  {
+   "date": "2026-05-06",
+   "title": "Fiske and Bailey Claim Matthew Vassar Honors At Annual Awards Ceremony",
+   "url": "https://vassarathletics.com/news/2026/5/6/general-claim-matthew-vassar-honors-at-annual-awards-ceremony.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2026-04-25",
+   "title": "Brewers Have Big Day At Northeast Collegiate Club Championships",
+   "url": "https://vassarathletics.com/news/2026/4/25/womens-rowing-brewers-have-big-day-at-northeast-collegiate-club-championships.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2026-04-25",
+   "title": "Varsity 8 Victorious At Northeast Collegiate Club Championships",
+   "url": "https://vassarathletics.com/news/2026/4/25/mens-rowing-varsity-8-victorious-at-northeast-collegiate-club-championships.aspx",
+   "squad": "Men's"
+  },
+  {
+   "date": "2026-04-18",
+   "title": "Women’s Rowing Competes At New York State Championship",
+   "url": "https://vassarathletics.com/news/2026/4/18/womens-rowing-womens-rowing-competes-at-new-york-state-championship.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2026-04-18",
+   "title": "Men’s Varsity Eight Races To Runner-Up Finish At New York State Championships",
+   "url": "https://vassarathletics.com/news/2026/4/18/mens-rowing-mens-varsity-eight-races-to-runner-up-finish-at-new-york-state-championships.aspx",
+   "squad": "Men's"
+  },
+  {
+   "date": "2026-04-12",
+   "title": "Women’s Rowing Has Strong Day At Union",
+   "url": "https://vassarathletics.com/news/2026/4/12/womens-rowing-womens-rowing-has-strong-day-at-union.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2026-04-12",
+   "title": "Brewers Compete At Union",
+   "url": "https://vassarathletics.com/news/2026/4/12/mens-rowing-brewers-compete-at-union.aspx",
+   "squad": "Men's"
+  },
+  {
+   "date": "2026-04-05",
+   "title": "Varsity 8 Competes At WPI’s Class Of 2003 Cup",
+   "url": "https://vassarathletics.com/news/2026/4/5/mens-rowing-varsity-8-competes-at-wpis-class-of-2003-cup.aspx",
+   "squad": "Men's"
+  },
+  {
+   "date": "2025-10-19",
+   "title": "Brewers Compete At Head Of The Charles",
+   "url": "https://vassarathletics.com/news/2025/10/19/womens-rowing-brewers-compete-at-head-of-the-charles.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2025-10-19",
+   "title": "Men’s Rowing Races At Head Of The Charles",
+   "url": "https://vassarathletics.com/news/2025/10/19/mens-rowing-mens-rowing-races-at-head-of-the-charles.aspx",
+   "squad": "Men's"
+  },
+  {
+   "date": "2025-10-15",
+   "title": "Vassar Athletics Completes Record-Breaking Day of Giving Campaign",
+   "url": "https://vassarathletics.com/news/2025/10/15/general-vassar-athletics-completes-record-breaking-day-of-giving-campaign.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2025-10-05",
+   "title": "Women’s Rowing Competes At Head Of The Riverfront",
+   "url": "https://vassarathletics.com/news/2025/10/5/womens-rowing-womens-rowing-competes-at-head-of-the-riverfront.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2025-05-08",
+   "title": "Gelb and Keker Claim Matthew Vassar Honors At Annual Awards Ceremony",
+   "url": "https://vassarathletics.com/news/2025/5/8/general-gelb-and-keker-claim-matthew-vassar-honors-at-annual-awards-ceremony.aspx",
+   "squad": "Women's"
+  }
+ ],
+ "debug": {
+  "season": "2026-2027",
+  "schedules": [
+   {
+    "squad": "Women's",
+    "url": "https://www.vassarathletics.com/sports/womens-rowing/schedule/2026-27",
+    "strategy": "classic",
+    "count": 2
+   },
+   {
+    "squad": "Men's",
+    "url": "https://www.vassarathletics.com/sports/mens-rowing/schedule/2026-27",
+    "strategy": "classic",
+    "count": 2
+   }
+  ],
+  "news_errors": []
+ }
 }
