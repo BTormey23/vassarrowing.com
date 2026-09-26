@@ -76,6 +76,51 @@
     }
   })();
 
+  // committees: descriptions, members from the roster, hover/tap reveal, volunteer form
+  const COMMITTEES = [
+    ['EB','Endowment Board','Sets direction for the whole effort, keeps the committees moving, and is the alumni group\'s point of contact with Vassar Athletics and Advancement.'],
+    ['SV','Strategic Vision','The long-range plan: what the program should look like in ten years and what it takes to get there.'],
+    ['EF','Endowment Fundraising','Builds the permanent Rowing Endowment through anchor gifts and multi-year pledges, working through Advancement.'],
+    ['BD','Brewer Day Challenge','Runs the annual day-of-giving push: cohort captains for each decade, the challenge structure, and the participation race.'],
+    ['RE','Real Estate Ownership & Utilization','How the boathouse site on the Hudson is used, cared for, and improved over time.'],
+    ['EQ','Equipment & Facilities Funding','Shells, oars, ergs, launches, and the boathouse itself: what the team needs and how it gets funded.'],
+    ['AR','Annual Alum Rowing Event','Plans the fall alumni regatta weekend, from boatings and ergs to dinner.'],
+    ['CB','Communications & Booster Activities','This website, the roster, newsletters, photos, and the outreach that keeps everyone connected.']
+  ];
+  const cWrap = document.getElementById('committees'), checks = document.getElementById('v-checks');
+  if (cWrap) {
+    COMMITTEES.forEach(([code, name, blurb]) => {
+      const members = R.filter(p => Array.isArray(p.c) && p.c.includes(code)).sort((a,b)=> a.l.localeCompare(b.l) || a.f.localeCompare(b.f));
+      const div = document.createElement('div'); div.className = 'cmte'; div.tabIndex = 0;
+      div.innerHTML = '<div class="cmte-name"><span>' + esc(name) + '</span><span class="n">' + (members.length ? members.length + (members.length===1?' member':' members') : 'forming') + '</span></div>'
+        + '<div class="cmte-body"><div>' + esc(blurb) + '</div><div class="members"><span class="lbl">Members</span>'
+        + (members.length ? members.map(p => esc(p.f + ' ' + p.l) + ' \'' + String(p.y).slice(2)).join(', ') : 'Not yet announced. Raise your hand below.') + '</div></div>';
+      div.addEventListener('click', () => div.classList.toggle('open'));
+      cWrap.appendChild(div);
+      if (checks) { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="' + esc(name) + '"> ' + esc(name); checks.appendChild(lab); }
+    });
+    if (checks) { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="Cohort captain for my decade (Brewer Day)"> Cohort captain for my decade (Brewer Day)'; checks.appendChild(lab); }
+  }
+  const vf = document.getElementById('vf');
+  if (vf) {
+    const vout = document.getElementById('v-out'), vbody = document.getElementById('v-body');
+    const vv = id => document.getElementById(id).value.trim();
+    vf.addEventListener('submit', e => {
+      e.preventDefault();
+      const picked = [...vf.querySelectorAll('input[type=checkbox]:checked')].map(c => c.value);
+      const txt = ['Vassar Rowing volunteer', '', 'Name: ' + vv('v-name'), 'Class year: ' + vv('v-year'), 'Email: ' + vv('v-email'), '',
+        'Committees: ' + (picked.length ? picked.join('; ') : '(none picked)'), '', vv('v-note')].join('\n');
+      vbody.textContent = txt;
+      document.getElementById('v-mailto').href = 'mailto:' + document.getElementById('v-addr').textContent + '?subject=' + encodeURIComponent('Volunteer – Vassar Rowing committees') + '&body=' + encodeURIComponent(txt);
+      vout.classList.add('show'); vout.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+    document.getElementById('v-copy').addEventListener('click', function(){
+      const btn = this;
+      navigator.clipboard.writeText(vbody.textContent).then(()=>{ btn.textContent='Copied'; setTimeout(()=>btn.textContent='Copy text',1500); })
+        .catch(()=>{ const r=document.createRange(); r.selectNodeContents(vbody); const s=getSelection(); s.removeAllRanges(); s.addRange(r); });
+    });
+  }
+
   // update form → prepared email text (the live site will post to a form service instead)
   const f = document.getElementById('f'), out = document.getElementById('out'), body = document.getElementById('body');
   const v = id => document.getElementById(id).value.trim();

@@ -159,8 +159,19 @@ section.block + section.block{border-top:1px solid var(--line)}
 @media (max-width:760px){.history{grid-template-columns:1fr}}
 
 /* who */
-.committees{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:26px;padding:0;list-style:none}
-.committees li{padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-weight:600;font-size:15px}
+.committees{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:14px}
+.cmte{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:12px 14px;cursor:pointer;display:grid;gap:8px;transition:border-color .15s}
+.cmte:hover,.cmte:focus-within,.cmte.open{border-color:var(--burg)}
+.cmte .cmte-name{font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.cmte .cmte-name .n{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.cmte .cmte-body{display:none;font-size:14.5px;color:var(--ink-2)}
+.cmte:hover .cmte-body,.cmte:focus-within .cmte-body,.cmte.open .cmte-body{display:grid;gap:8px}
+.cmte .members{font-size:14px;color:var(--ink);line-height:1.45}
+.cmte .members .lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:2px}
+.checks{border:1px solid var(--line);border-radius:8px;padding:12px 14px 6px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px 16px;margin:0}
+.checks legend{font-size:14px;font-weight:600;color:var(--ink-2);padding:0 6px}
+.checks label{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:var(--ink);padding:4px 0}
+.checks input{width:auto}
 
 /* update form */
 .form{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px;margin-top:26px;display:grid;gap:16px}
