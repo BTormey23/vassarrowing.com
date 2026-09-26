@@ -1,0 +1,30 @@
+name: Refresh schedule and news
+
+on:
+  schedule:
+    - cron: "17 10 * * *"   # daily, 10:17 UTC (about 6 AM Eastern)
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/fetch_feeds.py"
+      - ".github/workflows/feeds.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4
+      - run: python scripts/fetch_feeds.py
+      - name: Commit if changed
+        run: |
+          git config user.name "feed-bot"
+          git config user.email "feed-bot@users.noreply.github.com"
+          git add data/feeds.json
+          if git diff --cached --quiet; then echo "No changes"; else git commit -m "Refresh schedule and news" && git push; fi
