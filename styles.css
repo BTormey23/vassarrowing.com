@@ -33,8 +33,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 img{max-width:100%;display:block}
 .wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
 .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
-.lede{font-size:20px;color:var(--ink-2);max-width:62ch}
-.measure{max-width:65ch}
+.lede{font-size:20px;color:var(--ink-2);max-width:100%;text-wrap:pretty}
+.measure{max-width:100%;text-wrap:pretty}
 section.block{padding-block:72px}
 section.block + section.block{border-top:1px solid var(--line)}
 .stack{display:grid;gap:14px}
@@ -85,6 +85,12 @@ section.block + section.block{border-top:1px solid var(--line)}
 .chip:hover,.chip[aria-pressed=true]{background:var(--burg);color:var(--on-burg);border-color:var(--burg)}
 .results{display:grid;gap:26px}
 .class-group{display:grid;gap:10px}
+details.class-group{gap:0}
+details.class-group > summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:6px 0}
+details.class-group > summary::-webkit-details-marker{display:none}
+details.class-group > summary .caret{margin-left:auto;width:10px;height:10px;border-right:2px solid var(--burg);border-bottom:2px solid var(--burg);transform:rotate(-45deg);transition:transform .15s;align-self:center}
+details.class-group[open] > summary .caret{transform:rotate(45deg)}
+details.class-group > .names{margin-top:6px;margin-bottom:10px}
 .class-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .class-head h3{font-size:22px}
 .class-head.pinned h3{font-size:30px;color:var(--burg)}
@@ -168,10 +174,11 @@ section.block + section.block{border-top:1px solid var(--line)}
 .cmte:hover .cmte-body,.cmte:focus-within .cmte-body,.cmte.open .cmte-body{display:grid;gap:8px}
 .cmte .members{font-size:14px;color:var(--ink);line-height:1.45}
 .cmte .members .lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:2px}
-.checks{border:1px solid var(--line);border-radius:8px;padding:12px 14px 6px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px 16px;margin:0}
+.checks{border:1px solid var(--line);border-radius:8px;padding:12px 14px 10px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px;margin:0}
+@media (max-width:760px){.checks{grid-template-columns:1fr}}
 .checks legend{font-size:14px;font-weight:600;color:var(--ink-2);padding:0 6px}
-.checks label{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:var(--ink);padding:4px 0}
-.checks input{width:auto}
+.form .checks label{display:grid;grid-template-columns:18px 1fr;align-items:start;gap:10px;font-size:15px;font-weight:500;color:var(--ink);padding:4px 0;line-height:1.3}
+.form .checks input[type=checkbox]{width:18px;height:18px;margin:2px 0 0;padding:0;accent-color:var(--burg);border-radius:3px}
 
 /* update form */
 .form{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px;margin-top:26px;display:grid;gap:16px}
