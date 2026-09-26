@@ -1,0 +1,12 @@
+{
+ "updated": "2026-09-26T13:33:55+00:00",
+ "events": [],
+ "news": [
+  {"date": "2026-05-10", "title": "Men's Rowing Concludes Season At National Invitational Rowing Championships", "url": "https://vassarathletics.com/news/2026/5/10/mens-rowing-mens-rowing-concludes-season-at-national-invitational-rowing-championships.aspx", "squad": "Men's"},
+  {"date": "2026-05-09", "title": "Men's Varsity 8 Wins Bronze At Dad Vail Regatta", "url": "https://vassarathletics.com/news/2026/5/9/mens-rowing-mens-varsity-8-wins-bronze-at-dad-vail-regatta.aspx", "squad": "Men's"},
+  {"date": "2026-05-08", "title": "Varsity 8 Races Into Club/DIII Grand Final At Dad Vail Regatta", "url": "https://vassarathletics.com/news/2026/5/8/mens-rowing-varsity-8-races-into-club-diii-grand-final-at-dad-vail-regatta.aspx", "squad": "Men's"},
+  {"date": "2026-04-25", "title": "Varsity 8 Victorious At Northeast Collegiate Club Championships", "url": "https://vassarathletics.com/news/2026/4/25/mens-rowing-varsity-8-victorious-at-northeast-collegiate-club-championships.aspx", "squad": "Men's"},
+  {"date": "2026-04-18", "title": "Men's Varsity Eight Races To Runner-Up Finish At New York State Championships", "url": "https://vassarathletics.com/news/2026/4/18/mens-rowing-mens-varsity-eight-races-to-runner-up-finish-at-new-york-state-championships.aspx", "squad": "Men's"}
+ ],
+ "debug": {"note": "seed file; replaced by the first Action run"}
+}
