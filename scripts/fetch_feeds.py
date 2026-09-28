@@ -224,3 +224,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # Piggyback: import any new photos listed in photos/import/*.json
+    # (see scripts/import_photos.py) and stage them so the workflow's
+    # commit step picks them up. Never fails the feed refresh.
+    try:
+        import os, subprocess
+        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "pillow"], check=True)
+        here = os.path.dirname(os.path.abspath(__file__))
+        subprocess.run([sys.executable, os.path.join(here, "import_photos.py")])
+        subprocess.run(["git", "add", "photos"])
+    except Exception as e:
+        print("photo import skipped:", e)
