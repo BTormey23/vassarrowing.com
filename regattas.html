@@ -32,7 +32,12 @@
 .mosaic.wide{grid-template-columns:repeat(4,1fr);grid-auto-rows:190px}
 .mosaic.wide figure{grid-column:span 1;grid-row:span 1}
 .mosaic.wide figure.big{grid-column:span 2;grid-row:span 2}
+.mosaic.wide{grid-auto-flow:dense}
 @media (max-width:760px){.mosaic.wide{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}.mosaic.wide figure.big{grid-column:span 2;grid-row:span 1}}
+.banner{margin:22px 0 0;border-radius:10px;overflow:hidden;position:relative;aspect-ratio:3/2;max-height:620px;width:100%}
+.banner img{width:100%;height:100%;object-fit:cover;display:block}
+.banner figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 16px 12px;font-size:14px;color:#fff;background:linear-gradient(180deg,transparent,rgba(30,12,18,.75))}
+.story h3{font-size:24px;color:var(--burg);margin-top:8px}
 .send{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 </style>
 </head>
@@ -58,32 +63,49 @@
 <main class="wrap">
 
 <section class="year" id="y2026">
-  <div class="year-head"><h2>2026</h2><span class="when">Second Alum Rowing Regatta &middot; Fall 2026</span></div>
+  <div class="year-head"><h2>2026</h2><span class="when">Second Alum Rowing Regatta &middot; September 19&ndash;20, 2026</span></div>
+  <figure class="banner"><img src="photos/2026/group-photo.jpg" alt="Alumni and current team members gathered for a group photo in front of the boathouse and the Vassar Rowing tent" loading="lazy"><figcaption>The 2026 alumni regatta crew, alumni and students together at the boathouse</figcaption></figure>
   <div class="story">
-    <p>The second alumni regatta brought alumni back to the boathouse to row alongside the current men's and women's squads, race on the ergs, and catch up on the apron. The full write-up is coming from the people who were there.</p>
-    <p>Were you on the water, on an erg, or under the tent? Send a few lines about your favorite moment and we'll add it here with your name and class year.</p>
+    <h3>Saturday</h3>
+    <p>We gathered early at the boathouse, but the Hudson had other plans: the water was too choppy to launch. So the morning turned into a big erg contest instead. Alumni and students split into eight mixed teams, and each team cycled its rowers through two 250-meter sprints, so every rower pulled 500 meters in all. The cheering was loud.</p>
+    <p>After the ergs came breakfast and story time. Alumni and students took the microphone in turn, some with touching reflections on what rowing and this team have meant in their lives, others with hilarious tales of shenanigans and crazy moments on and off the water with VC Rowing. Both generations shared stories that meant a lot to everyone listening.</p>
+    <p>By the time the stories wound down, the river had calmed enough to row. We got two men's eights and two women's eights on the water and put in some strong rowing up the Hudson to the Culinary Institute of America and back down to the boathouse. Then we put the equipment away, cleaned up, and headed off for some time on campus.</p>
+    <p>In the evening we gathered for a great dinner at Main Building. More stories were shared, we talked about the vision for the future of the VC Rowing team, and Coach Wells showed videos of the current team at work, and at play, including putting a shell out on Sunset Lake.</p>
+    <h3>Sunday</h3>
+    <p>We met even earlier on Sunday to try to catch calmer water. Despite the rain (and some of the students taking the morning off to sleep in), we got a men's eight and a women's eight on the water for a good row down the Hudson, past both bridges, and back up river again before putting the equipment away. Then everyone tucked into a warming breakfast, seated inside the shell house, since the rain ruled out eating outdoors.</p>
+    <p>Were you on the water, on an erg, or at the microphone? Send a few lines about your favorite moment and we'll add it here with your name and class year.</p>
   </div>
   <div class="moments">
     <h3>Moments worth remembering</h3>
-    <p>This is where the funny ones go: the crab, the coxswain who wouldn't stop, the alum who still had the 1990s unisuit. Send yours and we'll post the best.</p>
+    <p>This is where the funny ones go: the erg sprint that went sideways, the story that brought the house down, the Sunday sleep-in. Send yours and we'll post the best.</p>
   </div>
   <div class="gallery">
     <h3>Photos</h3>
     <div class="mosaic wide">
-      <figure class="big"><img src="photos/team-table.jpg" alt="Current team members and an alumna gathered around a table looking at an old photo book outside the boathouse" loading="lazy"><figcaption>Old photo books on the boathouse table</figcaption></figure>
-      <figure><img src="photos/alumni-boathouse.jpg" alt="Three alumni in VC Rowing gear in front of the boathouse" loading="lazy"><figcaption>Alumni at the boathouse</figcaption></figure>
-      <figure><img src="photos/erg-2.jpg" alt="An alumnus on the erg outside the boathouse" loading="lazy"><figcaption>On the ergs</figcaption></figure>
-      <figure><img src="photos/erg-1.jpg" alt="An alumnus pulling on an erg in the morning sun outside the boathouse" loading="lazy"><figcaption>Morning erg</figcaption></figure>
-      <figure><img src="photos/tent.jpg" alt="The Vassar Rowing tent set up on the boathouse apron on a rainy morning" loading="lazy"><figcaption>The tent goes up</figcaption></figure>
-      <figure><img src="photos/blades-stacked.jpg" alt="Burgundy Vassar blades stacked in the boathouse rack" loading="lazy"><figcaption>Blades ready</figcaption></figure>
-      <figure><img src="photos/artemis.jpg" alt="The name Artemis on the bow of a burgundy Vassar shell" loading="lazy"><figcaption>Artemis</figcaption></figure>
-      <figure><img src="photos/eight-hudson.jpg" alt="An eight rowing on the Hudson with the western ridge behind" loading="lazy"><figcaption>On the Hudson</figcaption></figure>
-      <figure><img src="photos/oar-night.jpg" alt="An oar on the ground under the boathouse lights at night" loading="lazy"><figcaption>After dark</figcaption></figure>
+      <figure><img src="photos/2026/morning-gathering.jpg" alt="Alumni in Vassar Rowing jackets chatting outside the boathouse in the early morning" loading="lazy"><figcaption>An early start at the boathouse</figcaption></figure>
+      <figure><img src="photos/2026/morning-smiles.jpg" alt="Two rowers smiling for the camera in the boathouse lot" loading="lazy"><figcaption>Saturday morning</figcaption></figure>
+      <figure><img src="photos/2026/erg-cheering.jpg" alt="An alumnus pulling on an erg while teammates lean in and cheer" loading="lazy"><figcaption>The erg contest</figcaption></figure>
+      <figure><img src="photos/2026/erg-women.jpg" alt="A rower driving through an erg sprint as teammates cheer her on" loading="lazy"><figcaption>Eight mixed teams, 500 meters each</figcaption></figure>
+      <figure class="big"><img src="photos/2026/erg-sprint.jpg" alt="A student on the erg with teammates crouched around him shouting encouragement" loading="lazy"><figcaption>Two 250-meter sprints per rower</figcaption></figure>
+      <figure><img src="photos/2026/erg-smile.jpg" alt="A rower smiling mid-sprint on the erg with her team gathered behind" loading="lazy"><figcaption>Smiling through the sprint</figcaption></figure>
+      <figure><img src="photos/2026/erg-spent.jpg" alt="A rower sitting on an erg with his head in his hand after a sprint" loading="lazy"><figcaption>Everything left on the erg</figcaption></figure>
+      <figure><img src="photos/2026/breakfast.jpg" alt="Alumni and students seated at breakfast tables outside the boathouse" loading="lazy"><figcaption>Breakfast and stories</figcaption></figure>
+      <figure><img src="photos/2026/stories-mic.jpg" alt="An alumna in a Vassar cap sharing a story at the microphone" loading="lazy"><figcaption>Story time</figcaption></figure>
+      <figure><img src="photos/2026/student-story.jpg" alt="A rower smiling while telling a story into the microphone" loading="lazy"><figcaption>Stories from every generation</figcaption></figure>
+      <figure><img src="photos/2026/student-story-2.jpg" alt="A rower sharing a story at the microphone beside the boathouse" loading="lazy"><figcaption>Taking a turn at the mic</figcaption></figure>
+      <figure><img src="photos/2026/shell-overhead.jpg" alt="Rowers lifting an eight overhead in the boat yard" loading="lazy"><figcaption>Hands on, the water calmed</figcaption></figure>
+      <figure class="big"><img src="photos/2026/mens-eight-dock.jpg" alt="A men's eight pushing off the dock with the Walkway Over the Hudson behind" loading="lazy"><figcaption>Pushing off the dock</figcaption></figure>
+      <figure><img src="photos/2026/womens-eight.jpg" alt="A women's eight rowing on the Hudson with the launch behind" loading="lazy"><figcaption>A women's eight on the Hudson</figcaption></figure>
+      <figure><img src="photos/2026/eight-upriver.jpg" alt="An eight of alumni and students rowing along the wooded shore" loading="lazy"><figcaption>Alumni and students in the same boat</figcaption></figure>
+      <figure class="big"><img src="photos/2026/eight-gulls.jpg" alt="An eight rowing under a sky full of gulls with the Hudson Highlands behind" loading="lazy"><figcaption>Up the river toward the CIA</figcaption></figure>
+      <figure><img src="photos/2026/catch.jpg" alt="A rower at the catch in an eight on the Hudson" loading="lazy"><figcaption>At the catch</figcaption></figure>
+      <figure><img src="photos/2026/flex.jpg" alt="Three rowers mid-row, one flexing for the camera" loading="lazy"><figcaption>Still got it</figcaption></figure>
+      <figure><img src="photos/2026/shell-home.jpg" alt="Rowers carrying a shell back up the dock ramp" loading="lazy"><figcaption>Back to the boathouse</figcaption></figure>
     </div>
   </div>
   <div class="send">
     <a class="btn btn-primary" href="mailto:brian@briantormey.com?subject=Alumni%20Regatta%202026%20%E2%80%93%20photos%20and%20stories">Send 2026 photos and stories</a>
-    <span class="privacy">Email brian@briantormey.com. Phone photos are perfect.</span>
+    <span class="privacy">Email brian@briantormey.com. Phone photos are perfect, and Sunday rain shots are especially welcome.</span>
   </div>
 </section>
 
