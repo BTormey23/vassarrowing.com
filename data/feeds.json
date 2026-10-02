@@ -1,13 +1,6 @@
 {
- "updated": "2026-10-01T17:03:16+00:00",
+ "updated": "2026-10-02T16:17:33+00:00",
  "events": [
-  {
-   "date": "2026-10-04",
-   "time": "",
-   "name": "Head of the Riverfront",
-   "location": "Hartford, CT",
-   "squad": "Men's & Women's"
-  },
   {
    "date": "2026-10-24",
    "time": "",
@@ -133,13 +126,13 @@
     "squad": "Women's",
     "url": "https://www.vassarathletics.com/sports/womens-rowing/schedule/2026-27",
     "strategy": "classic",
-    "count": 2
+    "count": 1
    },
    {
     "squad": "Men's",
     "url": "https://www.vassarathletics.com/sports/mens-rowing/schedule/2026-27",
     "strategy": "classic",
-    "count": 2
+    "count": 1
    }
   ],
   "news_errors": []
