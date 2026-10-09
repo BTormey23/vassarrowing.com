@@ -10,6 +10,8 @@ Static site for Vassar Rowing alumni. Hosted on GitHub Pages; DNS at GoDaddy.
   - Live count: set `donors` (a whole number), optional `dollars`, and `updated` (e.g. "3:24 PM Tue"). Optional `note` replaces the auto "next unlock" line.
   - Videos: paste the Google Drive file ID (the part between `/d/` and `/view`) into `src` for the featured video, a team video, or a Power 10 clip (add a `caption`). The Drive file must be shared "Anyone with the link". YouTube works too: set `provider` to `youtube` and `src` to the video ID. Team videos are vertical (`aspect` 9:16).
   - Revealing a challenge: replace its locked placeholder with a full entry, e.g. `{"revealed": true, "name": "Matcher name", "kind": "per", "every": 50, "amount": 1000, "from": 501, "to": 750, "max": 5000, "text": "One sentence, worded exactly as announced."}`. Use `"kind": "at", "at": N` for a one-time bonus. This file is public, so never add a challenge's details before it's announced.
+- Live count: `scripts/give2brew_live.py` + `.github/workflows/give2brew-live.yml` check Rowing's GiveCampus team page every 5 minutes during giving and write donors/dollars to `give2brew2026-live.json` on the `live-data` branch (the page reads it from raw.githubusercontent.com, so no site rebuilds). Set `"auto": false` in `data/give2brew2026.json` to fall back to the manual count; paste Rowing's GiveCampus URL into `givecampus_url` if it isn't found automatically. Pushing either file runs a self-test against the 2025 page.
+- `Give2Brew2026/video/` — hosted campaign videos; see the README there for file names and release times.
 - `404.html` — friendly not-found page; also redirects lowercase/short links (/give2brew, /give2brew2026) to /Give2Brew2026/.
 - `CNAME` — custom domain for GitHub Pages
 
