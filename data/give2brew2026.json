@@ -1,0 +1,55 @@
+{
+  "_help": "Live data for vassarrowing.com/Give2Brew2026. Edit donors/dollars/updated during the campaign. To reveal a locked challenge, replace its placeholder with the full entry (see README). To post a video, paste its Google Drive file ID (or YouTube ID) into src. Drive files must be shared 'Anyone with the link'. Never put an unrevealed challenge's details in this file: it is public.",
+  "updated": "",
+  "donors": 0,
+  "dollars": null,
+  "note": "",
+  "challenges": [
+    {
+      "revealed": true,
+      "name": "Coach Peter Wells",
+      "kind": "per",
+      "every": 50,
+      "amount": 1000,
+      "from": 1,
+      "to": 500,
+      "max": 10000,
+      "text": "$1,000 at every 50 donors, from 50 up to 500."
+    },
+    {
+      "revealed": true,
+      "name": "Brewers team bonus",
+      "kind": "at",
+      "at": 140,
+      "amount": 1000,
+      "max": 1000,
+      "text": "$1,000 when rowing reaches its team goal of 140 donors, from Winston and Elizabeth Clement '09."
+    },
+    { "revealed": false, "range": "501–750", "reveal": "Revealed at 500 donors" },
+    { "revealed": false, "range": "751–875", "reveal": "Revealed at 750 donors" },
+    { "revealed": false, "range": "876–1,000", "reveal": "Revealed at 750 donors" },
+    { "revealed": false, "range": "Overnight", "reveal": "Revealed Tuesday evening" }
+  ],
+  "featured": {
+    "title": "Why 1,000?",
+    "by": "Coach Peter Wells",
+    "provider": "drive",
+    "src": "1yuBlZur4XdZzl_znixnkWFkhCs5Z7cl5",
+    "aspect": "16:9"
+  },
+  "videos": [
+    { "n": 1, "title": "Sit Ready", "blurb": "The teaser. Blades squared, silence.", "drops": "Before launch", "provider": "drive", "src": "", "aspect": "9:16" },
+    { "n": 2, "title": "I'm One of 1000", "blurb": "Every athlete, one at a time. They gave first.", "drops": "Tue 8:00 AM", "provider": "drive", "src": "", "aspect": "9:16" },
+    { "n": 3, "title": "Meet the Crew", "blurb": "Why this team, and why they're asking you.", "drops": "Tue noon", "provider": "drive", "src": "", "aspect": "9:16" },
+    { "n": 4, "title": "Rowing News Team", "blurb": "Breaking news from the boathouse.", "drops": "Tue ~7 PM", "provider": "drive", "src": "", "aspect": "9:16" },
+    { "n": 5, "title": "5:02 AM", "blurb": "Practice o'clock. The team is up. Are you?", "drops": "Wed 5 AM", "provider": "drive", "src": "", "aspect": "9:16" }
+  ],
+  "power10": [
+    { "caption": "", "provider": "drive", "src": "" },
+    { "caption": "", "provider": "drive", "src": "" },
+    { "caption": "", "provider": "drive", "src": "" },
+    { "caption": "", "provider": "drive", "src": "" },
+    { "caption": "", "provider": "drive", "src": "" },
+    { "caption": "", "provider": "drive", "src": "" }
+  ]
+}

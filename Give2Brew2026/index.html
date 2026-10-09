@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>One of 1000 · Vassar Rowing #Give2Brew 2026</title>
+<meta name="description" content="Vassar Rowing is going for 1,000 donors in 29 hours on the 2026 Athletics Day of Giving, Oct 13–14. $5 makes you one of them.">
+<meta property="og:title" content="ONE OF 1000 · Vassar Rowing #Give2Brew">
+<meta property="og:description" content="1,000 donors in 29 hours. Tue Oct 13, 8 AM to Wed Oct 14, 1 PM ET. $5 makes you one of them.">
+<meta property="og:image" content="https://vassarrowing.com/photos/2026/group-photo.jpg">
+<meta property="og:url" content="https://vassarrowing.com/Give2Brew2026/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%237D1D35'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Georgia,serif' font-size='14' fill='%23FBF7F4'%3EVC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../styles.css">
+<style>
+.g-hero{position:relative;isolation:isolate;color:#fff;background:var(--burg-deep);overflow:hidden}
+.g-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.42;filter:saturate(.8)}
+.g-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(40,8,18,.35) 0%,rgba(40,8,18,.88) 78%)}
+.g-hero .wrap{padding-block:72px 56px}
+.g-hero .eyebrow{color:#F3C9D3}
+.g-title{font-family:var(--font-display);font-weight:600;font-size:clamp(56px,11vw,128px);line-height:.92;letter-spacing:-.02em;margin-top:12px}
+.g-title span{display:block;font-size:.42em;font-weight:400;font-style:italic;letter-spacing:0;margin-bottom:6px;color:#F6E9EC}
+.g-hero p.sub{font-size:clamp(18px,2.2vw,22px);max-width:40ch;color:#F6E9EC;margin-top:18px;text-wrap:pretty}
+.g-hero .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.g-hero .btn-primary{background:#fff;color:var(--burg-deep);border-color:#fff;font-size:17px;padding:14px 24px}
+.g-hero .btn-primary:hover{background:#F6E9EC;border-color:#F6E9EC}
+.designate{margin-top:12px;font-size:14.5px;color:#F3C9D3}
+.designate strong{color:#fff}
+.clock{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);font-weight:600;font-size:15px}
+.clock .dot{width:9px;height:9px;border-radius:50%;background:#F3C9D3}
+.clock.live .dot{background:#7FE0A6;box-shadow:0 0 0 0 rgba(127,224,166,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(127,224,166,0)}100%{box-shadow:0 0 0 0 rgba(127,224,166,0)}}
+@media (prefers-reduced-motion:reduce){.clock.live .dot{animation:none}}
+
+.g-sec{padding-block:64px}
+.g-sec + .g-sec{border-top:1px solid var(--line)}
+.g-sec h2{margin-top:8px}
+.g-sec .lede{margin-top:12px}
+
+/* count */
+.count-card{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px 24px}
+.count-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px}
+.count-num{font-family:var(--font-display);font-size:clamp(56px,9vw,92px);font-weight:600;line-height:1;color:var(--burg);font-variant-numeric:tabular-nums}
+.count-of{font-size:20px;color:var(--ink-2);font-weight:600}
+.count-meta{margin-left:auto;text-align:right;font-size:14.5px;color:var(--muted)}
+.count-meta b{color:var(--ink);font-weight:600}
+.bar{position:relative;margin-top:26px;height:16px;border-radius:999px;background:var(--surface-2);overflow:visible}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,var(--burg),var(--rose));width:0;transition:width 1s ease}
+.bar .tick{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--ink-2);opacity:.5}
+.bar .tick.pace{background:var(--river);opacity:1;width:3px}
+.bar .tick.pace::after{content:"1,000 pace";position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:11.5px;font-weight:700;color:var(--river);white-space:nowrap}
+.ticks{position:relative;height:34px;margin-top:6px;font-size:12.5px;color:var(--muted);font-weight:600}
+.ticks span{position:absolute;transform:translateX(-50%);white-space:nowrap;text-align:center;line-height:1.2}
+.ticks span:last-child{transform:translateX(-100%);text-align:right}
+.next{margin-top:18px;padding:14px 16px;border-radius:8px;background:var(--rose-soft);color:var(--ink);font-size:16.5px}
+.next b{color:var(--burg)}
+.chapters{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.chap{border:1px solid var(--line);border-radius:10px;padding:14px 14px 12px;background:var(--surface)}
+.chap .n{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.chap h3{font-size:20px;margin-top:4px}
+.chap p{font-size:14.5px;color:var(--ink-2);margin-top:4px}
+.chap.done{border-color:var(--burg);background:var(--rose-soft)}
+.chap.done .n{color:var(--burg)}
+.chap.now{border-color:var(--burg);box-shadow:inset 0 0 0 1px var(--burg)}
+.chap.now .n{color:var(--burg)}
+.lastyear{margin-top:14px;font-size:14.5px;color:var(--muted)}
+@media (max-width:760px){.chapters{grid-template-columns:1fr 1fr}.count-meta{margin-left:0;text-align:left;width:100%}.ticks span.opt{display:none}}
+
+/* videos */
+.featured{margin-top:26px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:26px;align-items:center}
+.player{position:relative;width:100%;border-radius:12px;overflow:hidden;background:#0d0d10;aspect-ratio:16/9}
+.player.v{aspect-ratio:9/16}
+.player iframe,.player video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player .soon{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:6px;padding:16px;color:#F6E9EC;background:linear-gradient(160deg,var(--burg) 0%,var(--burg-deep) 100%)}
+.player .soon b{font-family:var(--font-display);font-size:22px;font-weight:500;color:#fff}
+.vcard .player .soon b{font-size:30px;opacity:.85}
+.player .soon small{font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#F3C9D3}
+.featured h3{font-size:30px}
+.featured p{margin-top:10px;color:var(--ink-2)}
+.vgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:34px}
+.vcard h4{font-family:var(--font-display);font-size:19px;font-weight:500;margin:10px 0 2px}
+.vcard p{font-size:14px;color:var(--ink-2)}
+.vcard .when{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rose)}
+.p10{margin-top:34px}
+.p10 h3{font-size:22px}
+.p10 p{color:var(--ink-2);margin-top:4px;font-size:15.5px}
+.p10grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:14px}
+.p10grid .cap{font-size:13px;color:var(--ink-2);margin-top:6px}
+@media (max-width:900px){.featured{grid-template-columns:1fr}.vgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.p10grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.vgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* challenges */
+.ladder{margin-top:26px;display:grid;gap:12px}
+.rung{display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:center;padding:18px 20px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.rung .range{font-family:var(--font-display);font-size:22px;font-weight:600;color:var(--burg);font-variant-numeric:tabular-nums}
+.rung h3{font-size:21px}
+.rung p{font-size:15.5px;color:var(--ink-2);margin-top:3px}
+.rung .won{font-weight:700;font-size:15px;color:var(--burg);text-align:right;white-space:nowrap}
+.rung .won small{display:block;font-weight:600;font-size:12.5px;color:var(--muted)}
+.rung.locked{background:repeating-linear-gradient(135deg,var(--surface) 0 12px,var(--surface-2) 12px 24px);border-style:dashed}
+.rung.locked .range{color:var(--muted)}
+.rung.locked h3{color:var(--ink-2)}
+.unlocked-total{margin-top:16px;font-size:16.5px}
+.unlocked-total b{color:var(--burg)}
+@media (max-width:640px){.rung{grid-template-columns:1fr;gap:6px}.rung .won{text-align:left}}
+
+/* how */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px;padding:0;list-style:none}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 16px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--burg);color:var(--on-burg);font-weight:700;margin-bottom:10px}
+.steps b{display:block;font-size:17px}
+.steps span{display:block;font-size:15px;color:var(--ink-2);margin-top:4px}
+@media (max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.steps{grid-template-columns:1fr}}
+.faq{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px}
+.faq div{padding:14px 0;border-top:1px solid var(--line)}
+.faq b{display:block;font-size:16.5px}
+.faq span{display:block;color:var(--ink-2);font-size:15.5px;margin-top:3px}
+@media (max-width:760px){.faq{grid-template-columns:1fr}}
+
+/* schedule */
+.sched{margin-top:24px;display:grid;gap:0;border-left:3px solid var(--rose-soft);padding-left:22px}
+.sched div{position:relative;padding:10px 0}
+.sched div::before{content:"";position:absolute;left:-30px;top:16px;width:13px;height:13px;border-radius:50%;background:var(--surface);border:3px solid var(--burg)}
+.sched div.past::before{background:var(--burg)}
+.sched time{display:block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--rose)}
+.sched b{font-size:17px}
+.sched span{color:var(--ink-2);font-size:15.5px}
+
+/* share */
+.share{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:24px}
+.sharebox{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px}
+.sharebox h3{font-size:20px}
+.sharebox p.msg{margin-top:10px;padding:12px 14px;border-radius:8px;background:var(--surface-2);font-size:15.5px;color:var(--ink)}
+.sharebox .btn{margin-top:12px;font-size:15px;padding:9px 16px}
+.tags{margin-top:10px;font-weight:700;color:var(--burg)}
+@media (max-width:760px){.share{grid-template-columns:minmax(0,1fr)}}
+.sharebox p.msg{overflow-wrap:anywhere}
+
+.give-bar{position:sticky;bottom:0;z-index:15;background:var(--burg-deep);color:#fff;border-top:1px solid rgba(255,255,255,.15)}
+.give-bar .wrap{display:flex;align-items:center;gap:14px;padding-block:10px}
+.give-bar .t{font-size:15px;line-height:1.3;margin-right:auto}
+.give-bar .t b{font-family:var(--font-display);font-size:19px;font-weight:600}
+@media (max-width:560px){.give-bar .t{font-size:13.5px}.give-bar .t b{font-size:17px}}
+.give-bar .btn{background:#fff;color:var(--burg-deep);border-color:#fff;padding:10px 18px;font-size:15.5px;white-space:nowrap}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="vc" aria-hidden="true">VC</span>Vassar Rowing</a>
+    <div class="nav-links">
+      <a href="#count">Live count</a><a href="#videos">Videos</a><a href="#challenges">Challenges</a><a href="#how">How to give</a><a href="#schedule">Schedule</a><a href="../index.html">Alumni home</a>
+    </div>
+  </div>
+</nav>
+
+<header class="g-hero">
+  <img src="../photos/2026/group-photo.jpg" alt="">
+  <div class="wrap">
+    <span class="eyebrow">2026 Athletics Day of Giving &middot; #Give2Brew</span>
+    <h1 class="g-title"><span>Be</span>ONE OF 1000</h1>
+    <p class="sub">Last year 405 of us gave to Vassar Rowing. This year Coach Wells is asking for 1,000 people in 29 hours: rowers and coxswains from every era, parents, spouses, kids, friends. $5 makes you one of them.</p>
+    <div class="clock" id="clock"><span class="dot"></span><span id="clock-text">Tue Oct 13, 8:00 AM to Wed Oct 14, 1:00 PM ET</span></div>
+    <div class="actions">
+      <a class="btn btn-primary give-link" href="https://engage.vassar.edu/portal/giving_day" target="_blank" rel="noopener">Give to Vassar Rowing</a>
+      <a class="btn btn-light" href="#videos">Watch Coach Wells: Why 1,000?</a>
+    </div>
+    <p class="designate">On the giving form, choose <strong>Men's and Women's Rowing</strong>.</p>
+  </div>
+</header>
+
+<main>
+<section class="g-sec" id="count">
+  <div class="wrap">
+    <span class="eyebrow">Live count</span>
+    <h2>Every person counts as one</h2>
+    <div class="count-card">
+      <div class="count-top">
+        <span class="count-num" id="donors">0</span>
+        <span class="count-of">of 1,000 donors</span>
+        <span class="count-meta" id="count-meta">Count goes live Tuesday at 8:00 AM</span>
+      </div>
+      <div class="bar" id="bar" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="0" aria-label="Donors toward 1,000">
+        <div class="fill" id="fill"></div>
+      </div>
+      <div class="ticks" id="ticks"></div>
+      <p class="next" id="next">The team gives first at 8:00 AM Tuesday. Coach Wells adds $1,000 at every 50 donors.</p>
+      <div class="chapters" id="chapters"></div>
+      <p class="lastyear">Last year: 405 donors gave $52,616 to Vassar Rowing. This year: 1,000 donors and $60,000+. Gifts go to needed equipment and team support.</p>
+    </div>
+  </div>
+</section>
+
+<section class="g-sec" id="videos">
+  <div class="wrap">
+    <span class="eyebrow">Videos</span>
+    <h2>From the coach and the crew</h2>
+    <div class="featured">
+      <div class="player" id="featured-player"></div>
+      <div>
+        <span class="eyebrow">Coach Peter Wells</span>
+        <h3 style="margin-top:6px">Why 1,000?</h3>
+        <p>Coach Wells on why he's asking for 1,000 donors this year, and why the team is going first.</p>
+        <p><a class="btn btn-primary give-link" style="margin-top:6px" href="https://engage.vassar.edu/portal/giving_day" target="_blank" rel="noopener">Give to Vassar Rowing</a></p>
+      </div>
+    </div>
+    <div class="vgrid" id="vgrid"></div>
+    <div class="p10" id="p10" hidden>
+      <h3>Power 10 thank-yous</h3>
+      <p>Ten hard strokes and a thank-you from the team at each milestone.</p>
+      <div class="p10grid" id="p10grid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="g-sec" id="challenges">
+  <div class="wrap">
+    <span class="eyebrow">Challenges</span>
+    <h2>Every donor unlocks more</h2>
+    <p class="lede">Matches are tied to the number of people who give, not the dollars. A $5 gift moves the count exactly as much as a big one. New challenges are revealed as we pass each mark.</p>
+    <div class="ladder" id="ladder"></div>
+    <p class="unlocked-total" id="unlocked-total"></p>
+  </div>
+</section>
+
+<section class="g-sec" id="how">
+  <div class="wrap">
+    <span class="eyebrow">How to give</span>
+    <h2>Four strokes</h2>
+    <ol class="steps">
+      <li><b>Go to the giving page</b><span><a class="give-link" href="https://engage.vassar.edu/portal/giving_day" target="_blank" rel="noopener">engage.vassar.edu/portal/giving_day</a>, Tue 8 AM to Wed 1 PM ET.</span></li>
+      <li><b>Choose Men's and Women's Rowing</b><span>That's rowing's team choice on the form, so your gift counts toward our 1,000.</span></li>
+      <li><b>Give what you can</b><span>$5 counts. Gave last year? Please match it.</span></li>
+      <li><b>Bring your people</b><span>Give for your spouse and kids, in their names. Each one counts. Then text a teammate.</span></li>
+    </ol>
+    <div class="faq">
+      <div><b>Does $5 really count?</b><span>Yes. Every donor counts as one toward 1,000, whatever the amount.</span></div>
+      <div><b>Can I give in my spouse's or kids' names?</b><span>Yes, and each person counts separately. One household can be four or five donors.</span></div>
+      <div><b>What do the gifts fund?</b><span>Needed equipment and team support for Vassar Rowing. Vassar directs 80% of each team's Day of Giving gifts to the team and 20% to the athletics department, which supports all student-athletes.</span></div>
+      <div><b>Already given?</b><span>Thank you. Forward this page to one teammate who hasn't, and watch for the next milestone.</span></div>
+      <div><b>Who's my captain?</b><span>Alumni volunteers are captaining each group of class years. Watch for a note from yours. Want to help? <a href="../index.html#who">Raise your hand</a>.</span></div>
+      <div><b>Giving stock, a DAF, or something bigger?</b><span>Vassar's Advancement office handles every kind of gift. Reach out and we'll connect you.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="g-sec" id="schedule">
+  <div class="wrap">
+    <span class="eyebrow">The 29 hours</span>
+    <h2>When to be at the start</h2>
+    <div class="sched" id="sched">
+      <div data-t="2026-10-13T08:00:00-04:00"><time>Tue Oct 13 · 8:00 AM</time><b>Attention… Row.</b> <span>The team gives first. Video: I'm One of 1000.</span></div>
+      <div data-t="2026-10-13T12:00:00-04:00"><time>Tue · Noon</time><b>Meet the Crew</b> <span>Midday count from the captains.</span></div>
+      <div data-t="2026-10-13T19:00:00-04:00"><time>Tue · ~7:00 PM</time><b>Evening Power 10</b> <span>Rowing News Team reports. Can we pass last year before bedtime?</span></div>
+      <div data-t="2026-10-14T05:02:00-04:00"><time>Wed Oct 14 · 5:02 AM</time><b>Practice o'clock</b> <span>Last year at this hour we were at 328. Eight hours left.</span></div>
+      <div data-t="2026-10-14T10:30:00-04:00"><time>Wed · 10:30 AM</time><b>Final call</b> <span>Two and a half hours to go.</span></div>
+      <div data-t="2026-10-14T13:00:00-04:00"><time>Wed · 1:00 PM</time><b>Weigh enough</b> <span>Giving closes. Results and thank-yous Thursday.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="g-sec" id="share">
+  <div class="wrap">
+    <span class="eyebrow">Pass it on</span>
+    <h2>Ask one person</h2>
+    <div class="share">
+      <div class="sharebox">
+        <h3>Text your household</h3>
+        <p class="msg" id="msg-house">I'm giving to Vassar Rowing today. They're going for 1,000 donors and every person counts. Would you give $5 too? https://engage.vassar.edu/portal/giving_day, choose "Men's and Women's Rowing". (Or I can give in your name, just say yes.)</p>
+        <button class="btn btn-ghost" data-copy="msg-house">Copy text</button>
+      </div>
+      <div class="sharebox">
+        <h3>Text a teammate</h3>
+        <p class="msg" id="msg-mate">Rowing's going for 1,000 donors by 1 PM Wednesday. Be ONE OF 1000 with me? $5 counts. Videos and the live count: vassarrowing.com/Give2Brew2026</p>
+        <button class="btn btn-ghost" data-copy="msg-mate">Copy text</button>
+        <p class="tags">#Give2Brew #VCRowingForever</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="give-bar">
+  <div class="wrap">
+    <span class="t"><b id="bar-count">ONE OF 1000</b><br><span id="bar-sub">Choose "Men's and Women's Rowing"</span></span>
+    <a class="btn give-link" href="https://engage.vassar.edu/portal/giving_day" target="_blank" rel="noopener">Give now</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><strong style="color:var(--ink)">Vassar Rowing Alumni</strong> · <a href="../index.html">vassarrowing.com</a></div>
+    <div>Gifts are made to Vassar College through its giving page. Organized by Vassar Rowing alumni with Coach Wells and the team.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var START = new Date('2026-10-13T08:00:00-04:00'), END = new Date('2026-10-14T13:00:00-04:00');
+  var GOAL = 1000, LAST = 405;
+  var CHAPTERS = [
+    {n:1, to:406, title:'Beat last year', text:'0 to 406'},
+    {n:2, to:750, title:'On to 750', text:'406 to 750'},
+    {n:3, to:810, title:'Double it', text:'750 to 810'},
+    {n:4, to:1000, title:'ONE OF 1000', text:'810 to 1,000'}
+  ];
+  var TICKS = [[140,'140',' team goal'],[406,'406',' passed 2025'],[750,'750',''],[810,'810',' doubled'],[1000,'1,000','']];
+  // 1,000-donor planning pace (hours after 8 AM Tue, donors)
+  var PACE = [[0,0],[0.5,45],[2,150],[4,300],[9,550],[14,720],[22,810],[26,900],[29,1000]];
+  var $ = function(id){return document.getElementById(id)};
+  var fmt = function(n){return Number(n).toLocaleString('en-US')};
+  var money = function(n){return '$'+fmt(n)};
+  var data = null;
+
+  function phase(now){ return now < START ? 'pre' : (now >= END ? 'post' : 'live'); }
+  function left(ms){
+    var m = Math.max(0, Math.floor(ms/60000)), d = Math.floor(m/1440), h = Math.floor(m%1440/60), mm = m%60;
+    return (d? d+'d ' : '') + (d||h ? h+'h ' : '') + mm+'m';
+  }
+  function pace(now){
+    var h = (now-START)/3600000; if (h<=0) return 0; if (h>=29) return GOAL;
+    for (var i=1;i<PACE.length;i++){ if (h<=PACE[i][0]){ var a=PACE[i-1], b=PACE[i]; return Math.round(a[1]+(b[1]-a[1])*(h-a[0])/(b[0]-a[0])); } }
+    return GOAL;
+  }
+
+  function tickClock(){
+    var now = new Date(), p = phase(now), c = $('clock'), t = $('clock-text');
+    c.classList.toggle('live', p==='live');
+    if (p==='pre') t.textContent = 'Starts Tue Oct 13, 8:00 AM ET · ' + left(START-now) + ' to go';
+    else if (p==='live') t.textContent = 'Live now · ' + left(END-now) + ' left · closes Wed 1:00 PM ET';
+    else t.textContent = 'Giving has closed. Thank you, all of you.';
+    document.querySelectorAll('#sched div').forEach(function(d){ d.classList.toggle('past', new Date(d.dataset.t) <= now); });
+    if (data) renderCount();
+  }
+
+  function unlockedFor(ch, n){
+    if (!ch.revealed) return 0;
+    if (ch.kind==='per'){ var k = Math.floor((Math.min(n, ch.to) - (ch.from-1)) / ch.every); return Math.max(0, Math.min(ch.max, k*ch.amount)); }
+    if (ch.kind==='at') return n >= ch.at ? ch.amount : 0;
+    return 0;
+  }
+  function nextUnlock(n){
+    var best = null;
+    (data.challenges||[]).forEach(function(ch){
+      if (!ch.revealed) return;
+      var at = null;
+      if (ch.kind==='per'){ var nx = (ch.from-1) + (Math.floor((n-(ch.from-1))/ch.every)+1)*ch.every; if (nx <= ch.to) at = nx; }
+      else if (ch.kind==='at' && n < ch.at) at = ch.at;
+      if (at && (!best || at < best.at)) best = {at:at, amount:ch.amount, name:ch.name};
+    });
+    return best;
+  }
+
+  function renderCount(){
+    var now = new Date(), p = phase(now), n = Math.max(0, +data.donors||0);
+    $('donors').textContent = fmt(n);
+    $('fill').style.width = Math.min(100, n/GOAL*100) + '%';
+    $('bar').setAttribute('aria-valuenow', n);
+    var bar = $('bar'); bar.querySelectorAll('.tick').forEach(function(e){e.remove()});
+    TICKS.slice(0,-1).forEach(function(t){ var e=document.createElement('span'); e.className='tick'; e.style.left=(t[0]/GOAL*100)+'%'; bar.appendChild(e); });
+    if (p==='live'){ var pc = pace(now); var e=document.createElement('span'); e.className='tick pace'; e.style.left=Math.min(100,pc/GOAL*100)+'%'; e.title='On pace for 1,000: about '+fmt(pc)+' by now'; bar.appendChild(e); }
+    var meta = [];
+    if (data.dollars) meta.push('<b>'+money(data.dollars)+'</b> raised');
+    if (data.updated) meta.push('Updated '+data.updated);
+    else if (p==='pre') meta.push('Count goes live Tuesday at 8:00 AM');
+    $('count-meta').innerHTML = meta.join(' · ');
+    var nx = nextUnlock(n), msg;
+    if (data.note) msg = data.note;
+    else if (p==='pre') msg = 'The team gives first at 8:00 AM Tuesday. Coach Wells adds <b>$1,000 at every 50 donors</b>, and the Brewers add a <b>$1,000 bonus at 140</b>.';
+    else if (p==='post') msg = '<b>'+fmt(n)+' people</b> stood up for Vassar Rowing. Thank you.';
+    else if (n >= GOAL) msg = '<b>ONE OF 1000.</b> You did it. Thank you.';
+    else if (nx) msg = '<b>'+fmt(nx.at-n)+' more</b> unlocks <b>'+money(nx.amount)+'</b> from '+nx.name+' at '+fmt(nx.at)+' donors.';
+    else msg = '<b>'+fmt(GOAL-n)+' more</b> to ONE OF 1000.';
+    if (p==='live' && n < LAST+1 && !data.note) msg += ' '+fmt(LAST+1-n)+' more to pass last year.';
+    $('next').innerHTML = msg;
+    var prev = 0;
+    $('chapters').innerHTML = CHAPTERS.map(function(c){
+      var cls = n >= c.to ? 'done' : (n >= prev ? 'now' : ''); prev = c.to;
+      return '<div class="chap '+cls+'"><span class="n">Chapter '+c.n+(cls==='done'?' · done':cls==='now'?' · now':'')+'</span><h3>'+c.title+'</h3><p>'+c.text+'</p></div>';
+    }).join('');
+    $('bar-count').textContent = p==='pre' ? 'ONE OF 1000' : fmt(n)+' of 1,000 donors';
+    $('bar-sub').textContent = p==='live' ? left(END-now)+' left · choose "Men\'s and Women\'s Rowing"' : (p==='pre' ? 'Tue 8 AM to Wed 1 PM ET · choose "Men\'s and Women\'s Rowing"' : 'Thank you');
+    renderLadder(n);
+  }
+
+  function renderLadder(n){
+    var total = 0;
+    $('ladder').innerHTML = (data.challenges||[]).map(function(ch){
+      if (!ch.revealed) return '<div class="rung locked"><span class="range">'+ch.range+'</span><div><h3>Challenge locked</h3><p>'+ch.reveal+'.</p></div><span class="won">&nbsp;</span></div>';
+      var u = unlockedFor(ch, n); total += u;
+      var range = ch.kind==='per' ? fmt(ch.from)+'–'+fmt(ch.to) : fmt(ch.at);
+      return '<div class="rung"><span class="range">'+range+'</span><div><h3>'+ch.name+'</h3><p>'+ch.text+'</p></div><span class="won">'+money(u)+'<small>of '+money(ch.max)+' unlocked</small></span></div>';
+    }).join('');
+    $('unlocked-total').innerHTML = total ? '<b>'+money(total)+'</b> in challenge gifts unlocked so far.' : '';
+  }
+
+  function embed(v, vertical){
+    var src = (v && v.src||'').trim();
+    if (!src) return null;
+    if (v.provider==='youtube') return '<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(src)+'?rel=0" title="'+(v.title||'Video')+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>';
+    if (v.provider==='file') return '<video src="'+src+'" controls playsinline preload="metadata"></video>';
+    return '<iframe src="https://drive.google.com/file/d/'+encodeURIComponent(src)+'/preview" title="'+(v.title||'Video')+'" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>';
+  }
+  function soon(title, when){ return '<div class="soon"><small>'+when+'</small><b>'+title+'</b></div>'; }
+
+  function renderVideos(){
+    var f = data.featured||{}, fp = $('featured-player');
+    fp.className = 'player' + (f.aspect==='9:16' ? ' v' : '');
+    fp.innerHTML = embed(f) || soon('Why 1,000?','Coming Friday');
+    $('vgrid').innerHTML = (data.videos||[]).map(function(v){
+      return '<div class="vcard"><div class="player v">'+(embed(v)||soon('&#9654;', 'Drops '+v.drops))+'</div><h4>'+v.title+'</h4><p><span class="when">'+v.drops+'</span><br>'+v.blurb+'</p></div>';
+    }).join('');
+    var clips = (data.power10||[]).filter(function(c){return c.src && c.src.trim()});
+    $('p10').hidden = !clips.length;
+    $('p10grid').innerHTML = clips.map(function(c){ return '<div><div class="player v">'+embed(c)+'</div>'+(c.caption?'<p class="cap">'+c.caption+'</p>':'')+'</div>'; }).join('');
+  }
+
+  function load(first){
+    fetch('../data/give2brew2026.json?t='+Date.now(), {cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+      var vidsChanged = !data || JSON.stringify([d.featured,d.videos,d.power10]) !== JSON.stringify([data.featured,data.videos,data.power10]);
+      data = d; renderCount(); if (vidsChanged) renderVideos();
+    }).catch(function(){ if (first){ data = {donors:0, challenges:[], videos:[], power10:[], featured:{}}; renderCount(); renderVideos(); } });
+  }
+
+  // render the ladder ticks labels once
+  $('ticks').innerHTML = TICKS.map(function(t,i){ return '<span class="'+(i===0||i===3?'opt':'')+'" style="left:'+(t[0]/GOAL*100)+'%">'+t[1]+(t[2]?'<br>'+t[2].trim():'')+'</span>'; }).join('');
+
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var txt = $(b.dataset.copy).textContent;
+      (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function(){ b.textContent='Copied'; setTimeout(function(){b.textContent='Copy text'},1800); }, function(){ b.textContent='Select and copy'; });
+    });
+  });
+
+  load(true);
+  tickClock();
+  setInterval(tickClock, 30000);
+  setInterval(function(){ var p = phase(new Date()); if (p==='live' || (START-new Date()) < 3600000) load(false); }, 60000);
+})();
+</script>
+</body>
+</html>
