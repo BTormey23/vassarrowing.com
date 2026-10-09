@@ -196,8 +196,8 @@ def stamp(now):
 def cycle(test=False):
     now = dt.datetime.now(dt.timezone.utc)
     cfg = load_config()
-    if cfg.get("auto") is False and not test:
-        print("auto is off in data/give2brew2026.json; skipping")
+    if (cfg.get("auto") is False or cfg.get("bot") is False) and not test:
+        print("server-side checking is off in data/give2brew2026.json; skipping")
         return
     res = read_count(TEST_URL if test else (cfg.get("givecampus_url") or "").strip())
     ensure_branch()
@@ -241,6 +241,10 @@ def main():
         return
     if "--loop" not in sys.argv:
         cycle()
+        return
+    cfg = load_config()
+    if cfg.get("bot") is False or cfg.get("auto") is False:
+        print("server-side checking is off in data/give2brew2026.json (the browser Count Keeper handles it)")
         return
     began = time.time()
     while time.time() - began < MAX_MINUTES * 60:
