@@ -111,12 +111,16 @@ def discover_campaign_urls():
 def read_count(configured=""):
     tried = []
     for url in ([configured] if configured else []) + GUESSES + discover_campaign_urls():
-        if not url or url in tried:
+        if not url or any(t.startswith(url + " ->") for t in tried):
             continue
-        tried.append(url)
         try:
-            r = get(url)
-        except Exception:
+            r = requests.get(url, headers=UA, timeout=30, allow_redirects=True)
+        except Exception as e:
+            tried.append(f"{url} -> {type(e).__name__}")
+            continue
+        title = re.search(r"<title>([^<]{0,80})", r.text or "")
+        tried.append(f"{url} -> HTTP {r.status_code}, {len(r.text)} chars, ends at {r.url}, title: {title.group(1).strip() if title else '-'}")
+        if not r.ok:
             continue
         final = r.url.rstrip("/")
         if final == SCHOOL:          # GiveCampus redirects unpublished campaigns to the school page
@@ -224,7 +228,7 @@ def cycle(test=False):
     last = prev.get("checked")
     stale = not last or (now - dt.datetime.fromisoformat(last)).total_seconds() > 1800
     if out.get("donors") != prev.get("donors") or out.get("dollars") != prev.get("dollars") \
-            or out.get("ok") != prev.get("ok") or "test" not in prev or stale:
+            or out.get("ok") != prev.get("ok") or "test" not in prev or stale or test:
         label = "TEST " if test else ""
         publish(out, sha, f"{label}live count: {out.get('donors')} donors, ${out.get('dollars')}" if out.get("ok")
                 else f"{label}live count: {out.get('error')}")
