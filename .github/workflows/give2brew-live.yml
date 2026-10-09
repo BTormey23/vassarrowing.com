@@ -1,0 +1,44 @@
+name: Give2Brew live count
+
+# Every 5 minutes during the 2026 Athletics Day of Giving (Tue Oct 13, 8 AM to
+# Wed Oct 14, 1 PM ET), reads Rowing's donors and dollars from GiveCampus and
+# publishes them to the live-data branch for vassarrowing.com/Give2Brew2026.
+# Each scheduled run loops for up to ~5.7 hours; the 20-minute schedule keeps
+# one queued behind it so there are no gaps. A push or manual run does a
+# one-time self-test against last year's Rowing page.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/give2brew-live.yml"
+      - "scripts/give2brew_live.py"
+  schedule:
+    - cron: "*/20 11-23 13 10 *"   # Oct 13, 7 AM-7:40 PM ET (UTC times)
+    - cron: "*/20 0-17 14 10 *"    # Oct 13 8 PM ET through Oct 14 1:40 PM ET
+
+permissions:
+  contents: write
+
+concurrency:
+  group: give2brew-live
+  cancel-in-progress: false
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4
+      - name: Self-test against last year's Rowing page
+        if: github.event_name != 'schedule'
+        run: python scripts/give2brew_live.py --test
+      - name: Live count, every 5 minutes
+        if: github.event_name == 'schedule'
+        run: python scripts/give2brew_live.py --loop
