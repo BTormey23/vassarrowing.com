@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Count Keeper · ONE OF 1000</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%237D1D35'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Georgia,serif' font-size='14' fill='%23FBF7F4'%3EVC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../styles.css">
+<style>
+body{font-size:16px}
+main{max-width:720px;margin:0 auto;padding:28px 20px 60px}
+h1{font-size:32px;margin-top:6px}
+h2{font-size:22px;margin-top:28px}
+p,li{color:var(--ink-2)}
+ol{padding-left:22px;display:grid;gap:8px;margin-top:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:14px}
+.bm{display:inline-block;margin-top:8px;padding:10px 16px;border-radius:6px;background:var(--burg);color:var(--on-burg);font-weight:700;text-decoration:none;cursor:grab}
+.status{display:flex;gap:18px;flex-wrap:wrap;align-items:baseline}
+.status .big{font-family:var(--font-display);font-size:48px;font-weight:600;color:var(--burg);line-height:1}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:700}
+.ok{background:#DDF3E5;color:#1F6B3A}.warn{background:#FCEBD0;color:#8A5A00}.bad{background:var(--rose-soft);color:var(--burg)}
+input[type=password]{width:100%;font:inherit;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);margin-top:6px}
+button{font:inherit;font-weight:600;padding:8px 14px;border-radius:6px;border:1.5px solid var(--burg);background:transparent;color:var(--burg);cursor:pointer;margin-top:8px}
+button.primary{background:var(--burg);color:var(--on-burg)}
+#log{margin-top:8px;font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-2);max-height:220px;overflow:auto;white-space:pre-wrap}
+code{font-size:13.5px;background:var(--surface-2);padding:1px 5px;border-radius:4px}
+</style>
+</head>
+<body>
+<main>
+  <span class="eyebrow">ONE OF 1000 &middot; #Give2Brew</span>
+  <h1>Count Keeper</h1>
+  <p>Keeps the live donor count on <a href="./">vassarrowing.com/Give2Brew2026</a> in step with Rowing's GiveCampus page, every 5 minutes, from your own browser.</p>
+
+  <div class="card" id="live-card">
+    <div class="status"><span class="big" id="k-donors">–</span><span><span id="k-dollars">–</span><br><span class="pill warn" id="k-state">Waiting for the GiveCampus tab</span></span></div>
+    <div id="log"></div>
+  </div>
+
+  <div class="card" id="token-card">
+    <strong>GitHub access token</strong>
+    <p style="margin-top:4px">Saved only in this browser. <span id="tok-state"></span></p>
+    <input type="password" id="tok" placeholder="github_pat_…" autocomplete="off">
+    <button class="primary" id="tok-save">Save token</button> <button id="tok-forget">Forget token</button> <button id="tok-test">Check token</button>
+  </div>
+
+  <h2>Set up (once)</h2>
+  <ol>
+    <li>Drag this button to your bookmarks bar: <br><a class="bm" id="bm" href="#">ONE OF 1000 Count Keeper</a></li>
+    <li>Paste the GitHub token Brian gives you in the box above and click <b>Save token</b>, then <b>Check token</b>.</li>
+  </ol>
+
+  <h2>On giving day</h2>
+  <ol>
+    <li>Open Rowing's GiveCampus team page (the page that shows Rowing's donors and dollars) in this same browser.</li>
+    <li>Click the <b>Count Keeper</b> bookmark. This window opens; leave both open.</li>
+    <li>A small burgundy box in the corner of the GiveCampus tab shows each reading. This window shows each update to the site.</li>
+    <li>Keep the computer awake and plugged in (on a Mac: System Settings &rarr; Battery/Lock Screen, or run <code>caffeinate -d</code> in Terminal). If either window closes, reopen the team page and click the bookmark again.</li>
+  </ol>
+  <p style="margin-top:14px">Test it any time on <a href="https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2025/pages/rowing" target="_blank" rel="noopener">last year's Rowing page</a>. Readings from 2025 are marked as a test and never show on the campaign page.</p>
+</main>
+
+<script>
+(function(){
+  var REPO = 'BTormey23/vassarrowing.com', BRANCH = 'live-data', PATH = 'give2brew2026-live.json';
+  var API = 'https://api.github.com/repos/' + REPO + '/contents/' + PATH;
+  var GC = /^https:\/\/(www\.)?givecampus\.com$/;
+  var HEARTBEAT = 20 * 60000;
+  var $ = function(id){ return document.getElementById(id); };
+  var lastWrite = 0, busy = false;
+
+  function tok(){ try { return localStorage.getItem('g2b_token') || ''; } catch(e){ return ''; } }
+  function setTok(v){ try { v ? localStorage.setItem('g2b_token', v) : localStorage.removeItem('g2b_token'); } catch(e){} showTok(); }
+  function showTok(){ $('tok-state').textContent = tok() ? 'A token is saved.' : 'No token saved yet.'; }
+  function log(s){ var t = new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit', second:'2-digit'}); $('log').textContent = t + '  ' + s + '\n' + $('log').textContent; }
+  function state(cls, txt){ var e = $('k-state'); e.className = 'pill ' + cls; e.textContent = txt; }
+  function b64(s){ return btoa(unescape(encodeURIComponent(s))); }
+  function unb64(s){ return decodeURIComponent(escape(atob(s.replace(/\n/g, '')))); }
+  function hdrs(){ return {'Authorization': 'Bearer ' + tok(), 'Accept': 'application/vnd.github+json'}; }
+  function stamp(d){ return d.toLocaleString('en-US', {timeZone:'America/New_York', hour:'numeric', minute:'2-digit', weekday:'short'}).replace(/^(\w+) (.*)$/, '$2 $1'); }
+
+  function publish(msg){
+    if (!tok()) { state('bad', 'No token saved'); return Promise.resolve({ok:false, text:'No GitHub token saved in the keeper window'}); }
+    return fetch(API + '?ref=' + BRANCH + '&t=' + Date.now(), {headers: hdrs(), cache: 'no-store'}).then(function(r){
+      if (r.status === 404) return {prev:{}, sha:null};
+      if (!r.ok) throw new Error('GitHub read failed: HTTP ' + r.status);
+      return r.json().then(function(j){ var p = {}; try { p = JSON.parse(unb64(j.content)); } catch(e){} return {prev:p, sha:j.sha}; });
+    }).then(function(x){
+      var prev = x.prev || {}, now = new Date(), test = !!msg.test;
+      if (!!prev.test !== test) prev = {};
+      var d = msg.donors, m = msg.dollars, note = '';
+      if (prev.donors && d < prev.donors) { note = ' (held at ' + prev.donors + '; counts never go down)'; d = prev.donors; m = prev.dollars; }
+      var changed = d !== prev.donors || m !== prev.dollars;
+      if (!changed && prev.checked && (now - new Date(prev.checked)) < HEARTBEAT && (now - lastWrite) < HEARTBEAT) {
+        return {ok:true, text:'No change: ' + d + ' donors' + note};
+      }
+      var out = {checked: now.toISOString().replace(/\.\d+Z$/, 'Z'), test: test, ok: true, error: '', donors: d, dollars: m,
+                 source: msg.source, keeper: 'browser',
+                 updated_iso: changed || !prev.updated_iso ? now.toISOString().replace(/\.\d+Z$/, 'Z') : prev.updated_iso,
+                 updated: changed || !prev.updated ? stamp(now) : prev.updated};
+      var body = {message: (test ? 'TEST ' : '') + 'live count: ' + d + ' donors, $' + m, branch: BRANCH, content: b64(JSON.stringify(out, null, 1) + '\n')};
+      if (x.sha) body.sha = x.sha;
+      return fetch(API, {method:'PUT', headers: Object.assign({'Content-Type':'application/json'}, hdrs()), body: JSON.stringify(body)}).then(function(r){
+        if (!r.ok) return r.text().then(function(t){ throw new Error('GitHub write failed: HTTP ' + r.status + ' ' + t.slice(0, 120)); });
+        lastWrite = Date.now();
+        return {ok:true, text:(changed ? 'Site updated: ' : 'Heartbeat: ') + d + ' donors, $' + (m || 0).toLocaleString() + note + (test ? ' [TEST]' : '')};
+      });
+    });
+  }
+
+  window.addEventListener('message', function(ev){
+    if (!GC.test(ev.origin) || !ev.data || ev.data.type !== 'g2b-count') return;
+    var msg = ev.data;
+    if (!/rowing/i.test(msg.title || '') || typeof msg.donors !== 'number' || msg.donors < 0 || msg.donors > 20000) {
+      ev.source.postMessage({type:'g2b-ack', ok:false, text:'That page isn\'t Rowing\'s team page'}, ev.origin);
+      log('Ignored a reading from ' + (msg.title || 'an unknown page')); return;
+    }
+    msg.test = /2025/.test(msg.source || '');
+    $('k-donors').textContent = msg.donors.toLocaleString();
+    $('k-dollars').textContent = (msg.dollars != null ? '$' + msg.dollars.toLocaleString() + ' raised' : '') + (msg.test ? ' · test (2025 page)' : '');
+    if (busy) return; busy = true;
+    publish(msg).then(function(res){
+      log(res.text); state(res.ok ? 'ok' : 'bad', res.ok ? 'Running · last check ' + new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}) : res.text);
+      ev.source.postMessage({type:'g2b-ack', ok:res.ok, text:res.text}, ev.origin);
+    }).catch(function(e){
+      log(String(e.message || e)); state('bad', 'Problem: see log');
+      ev.source.postMessage({type:'g2b-ack', ok:false, text:String(e.message || e)}, ev.origin);
+    }).then(function(){ busy = false; });
+  });
+
+  // tell the GiveCampus tab we're ready, so it sends a reading right away
+  if (window.opener) { try { window.opener.postMessage({type:'g2b-ready'}, '*'); } catch(e){} }
+
+  $('tok-save').onclick = function(){ var v = $('tok').value.trim(); if (v) { setTok(v); $('tok').value = ''; log('Token saved in this browser'); } };
+  $('tok-forget').onclick = function(){ setTok(''); log('Token removed from this browser'); };
+  $('tok-test').onclick = function(){
+    if (!tok()) { log('No token saved'); return; }
+    fetch('https://api.github.com/repos/' + REPO, {headers: hdrs(), cache:'no-store'}).then(function(r){ return r.json().then(function(j){ return [r.status, j]; }); }).then(function(x){
+      var ok = x[0] === 200 && x[1].permissions && x[1].permissions.push;
+      log(ok ? 'Token works: it can update ' + REPO : 'Token problem (HTTP ' + x[0] + '): it needs Contents read and write on ' + REPO);
+      state(ok ? 'ok' : 'bad', ok ? 'Token works' : 'Token problem');
+    }).catch(function(e){ log('Token check failed: ' + e); });
+  };
+  showTok();
+
+  // ---- the bookmarklet (runs inside the GiveCampus tab) ----
+  function keeper(){
+    var K = 'https://vassarrowing.com/Give2Brew2026/count-keeper.html';
+    if (!/givecampus\.com$/.test(location.hostname) || location.pathname.indexOf('/pages/') < 0) { alert("Open Rowing's GiveCampus team page first, then click this bookmark."); return; }
+    var s = window.__g2b;
+    if (s) { s.w = window.open(K, 'g2bkeeper', 'width=520,height=760'); setTimeout(s.tick, 2500); return; }
+    s = window.__g2b = {w: window.open(K, 'g2bkeeper', 'width=520,height=760')};
+    var b = document.createElement('div');
+    b.style.cssText = 'position:fixed;z-index:2147483647;right:12px;bottom:12px;background:#4E1121;color:#fff;font:600 14px/1.35 system-ui,sans-serif;padding:10px 14px;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.35);max-width:340px';
+    b.textContent = 'ONE OF 1000 Count Keeper starting…'; document.body.appendChild(b);
+    function n(t){ t = (t || '').replace(/[^\d.]/g, ''); return t ? Math.round(parseFloat(t)) : null; }
+    function say(t, warn){ b.style.background = warn ? '#8A5A00' : '#4E1121'; b.textContent = t; }
+    s.tick = function(){
+      fetch(location.href, {cache: 'no-store', credentials: 'include'}).then(function(r){ return r.text(); }).then(function(h){
+        var d = new DOMParser().parseFromString(h, 'text/html');
+        var a = d.querySelector('#donor_count .goal_stat_count'), m = d.querySelector('#donation_count .goal_stat_count');
+        if (!a) { say("Count Keeper: couldn't read the count. Reload this page and click the bookmark again.", true); return; }
+        var msg = {type: 'g2b-count', donors: n(a.textContent), dollars: n(m && m.textContent), title: d.title, source: location.href.split('#')[0], at: new Date().toISOString()};
+        if (!s.w || s.w.closed) { say('Keeper window is closed: click the bookmark again. Last reading: ' + msg.donors + ' donors', true); return; }
+        s.last = msg; s.w.postMessage(msg, 'https://vassarrowing.com');
+        say('Count Keeper: read ' + msg.donors + ' donors at ' + new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}) + '. Keep this tab open.');
+      }).catch(function(e){ say('Count Keeper: reading failed (' + e + '). Trying again in 5 minutes.', true); });
+    };
+    window.addEventListener('message', function(ev){
+      if (ev.origin !== 'https://vassarrowing.com' || !ev.data) return;
+      if (ev.data.type === 'g2b-ready') s.tick();
+      if (ev.data.type === 'g2b-ack') say('Count Keeper: ' + ev.data.text + ' · ' + new Date().toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'}), !ev.data.ok);
+    });
+    setTimeout(s.tick, 4000);
+    s.iv = setInterval(s.tick, 300000);
+  }
+  $('bm').href = 'javascript:' + encodeURIComponent('(' + keeper.toString() + ')()');
+  $('bm').onclick = function(e){ e.preventDefault(); alert('Drag this button to your bookmarks bar, then click it while you are on Rowing\'s GiveCampus page.'); };
+})();
+</script>
+</body>
+</html>

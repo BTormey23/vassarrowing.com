@@ -1,7 +1,8 @@
 {
-  "_help": "Live data for vassarrowing.com/Give2Brew2026. The donor count and dollars update automatically from GiveCampus every 5 minutes during giving (set auto to false to use the manual donors/dollars/updated below instead). If the automatic count can't find Rowing's 2026 page, paste the GiveCampus URL into givecampus_url. Videos: upload files to Give2Brew2026/video/ with the names below and they appear on their own at the release time; a Drive or YouTube ID in src is the fallback. Power 10 clips appear once the donor count reaches their 'at' number. Never put an unrevealed challenge's details in this file: it is public.",
+  "_help": "Live data for vassarrowing.com/Give2Brew2026. On giving day the donor count and dollars come from the Count Keeper (vassarrowing.com/Give2Brew2026/count-keeper.html), run in a browser tab on Rowing's GiveCampus page. Set auto to false to show the manual donors/dollars/updated below instead. bot is the GitHub server-side checker, off because GiveCampus blocks it. Videos: upload files to Give2Brew2026/video/ with the names below and they appear on their own at the release time; a Drive or YouTube ID in src is the fallback. Power 10 clips appear once the donor count reaches their 'at' number. Never put an unrevealed challenge's details in this file: it is public.",
   "auto": true,
   "givecampus_url": "",
+  "bot": false,
   "updated": "",
   "donors": 0,
   "dollars": null,
