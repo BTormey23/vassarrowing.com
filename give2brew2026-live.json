@@ -1,11 +1,11 @@
 {
- "checked": "2026-10-09T02:53:22+00:00",
+ "checked": "2026-10-09T02:56:46+00:00",
  "test": true,
  "ok": false,
  "error": "Rowing's 2026 GiveCampus page not found yet",
  "tried": [
-  "https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2025/pages/rowing",
-  "https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2026/pages/rowing",
-  "https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2026"
+  "https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2025/pages/rowing -> HTTP 403, 6053 chars, ends at https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2025/pages/rowing, title: Just a moment...",
+  "https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2026/pages/rowing -> HTTP 403, 6053 chars, ends at https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2026/pages/rowing, title: Just a moment...",
+  "https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2026 -> HTTP 403, 5993 chars, ends at https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2026, title: Just a moment..."
  ]
 }
