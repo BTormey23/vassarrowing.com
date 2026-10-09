@@ -71,6 +71,7 @@
 .player{position:relative;width:100%;border-radius:12px;overflow:hidden;background:#0d0d10;aspect-ratio:16/9}
 .player.v{aspect-ratio:9/16}
 .player iframe,.player video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player video{object-fit:contain;background:#0d0d10}
 .player .soon{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:6px;padding:16px;color:#F6E9EC;background:linear-gradient(160deg,var(--burg) 0%,var(--burg-deep) 100%)}
 .player .soon b{font-family:var(--font-display);font-size:22px;font-weight:500;color:#fff}
 .vcard .player .soon b{font-size:30px;opacity:.85}
@@ -311,7 +312,9 @@
   var $ = function(id){return document.getElementById(id)};
   var fmt = function(n){return Number(n).toLocaleString('en-US')};
   var money = function(n){return '$'+fmt(n)};
-  var data = null;
+  var data = null, live = null;
+  var LIVE_URL = 'https://raw.githubusercontent.com/BTormey23/vassarrowing.com/live-data/give2brew2026-live.json';
+  var seen = {};   // video file -> true once it exists on the site
 
   function phase(now){ return now < START ? 'pre' : (now >= END ? 'post' : 'live'); }
   function left(ms){
@@ -352,8 +355,17 @@
     return best;
   }
 
+  function liveOk(){
+    if (!live || !live.ok || live.test || data.auto === false || !live.checked) return false;
+    return (new Date() - new Date(live.checked)) < 45*60000;   // ignore if the bot has gone quiet
+  }
+  function counts(){
+    var m = {donors: Math.max(0, +data.donors||0), dollars: data.dollars, updated: data.updated, auto: false};
+    if (liveOk() && +live.donors >= m.donors) m = {donors: +live.donors, dollars: live.dollars, updated: live.updated, auto: true};
+    return m;
+  }
   function renderCount(){
-    var now = new Date(), p = phase(now), n = Math.max(0, +data.donors||0);
+    var now = new Date(), p = phase(now), c = counts(), n = c.donors;
     $('donors').textContent = fmt(n);
     $('fill').style.width = Math.min(100, n/GOAL*100) + '%';
     $('bar').setAttribute('aria-valuenow', n);
@@ -361,8 +373,8 @@
     TICKS.slice(0,-1).forEach(function(t){ var e=document.createElement('span'); e.className='tick'; e.style.left=(t[0]/GOAL*100)+'%'; bar.appendChild(e); });
     if (p==='live'){ var pc = pace(now); var e=document.createElement('span'); e.className='tick pace'; e.style.left=Math.min(100,pc/GOAL*100)+'%'; e.title='On pace for 1,000: about '+fmt(pc)+' by now'; bar.appendChild(e); }
     var meta = [];
-    if (data.dollars) meta.push('<b>'+money(data.dollars)+'</b> raised');
-    if (data.updated) meta.push('Updated '+data.updated);
+    if (c.dollars) meta.push('<b>'+money(c.dollars)+'</b> raised');
+    if (c.updated) meta.push('Updated '+c.updated+(c.auto ? ' from GiveCampus' : ''));
     else if (p==='pre') meta.push('Count goes live Tuesday at 8:00 AM');
     $('count-meta').innerHTML = meta.join(' · ');
     var nx = nextUnlock(n), msg;
@@ -395,31 +407,60 @@
     $('unlocked-total').innerHTML = total ? '<b>'+money(total)+'</b> in challenge gifts unlocked so far.' : '';
   }
 
-  function embed(v, vertical){
+  function exists(file){
+    if (!file) return Promise.resolve(false);
+    if (seen[file]) return Promise.resolve(true);
+    return fetch(file+'?t='+Date.now(), {method:'HEAD', cache:'no-store'}).then(function(r){ if (r.ok) seen[file]=true; return r.ok; }).catch(function(){return false});
+  }
+  function embedSrc(v){
     var src = (v && v.src||'').trim();
     if (!src) return null;
     if (v.provider==='youtube') return '<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(src)+'?rel=0" title="'+(v.title||'Video')+'" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>';
-    if (v.provider==='file') return '<video src="'+src+'" controls playsinline preload="metadata"></video>';
     return '<iframe src="https://drive.google.com/file/d/'+encodeURIComponent(src)+'/preview" title="'+(v.title||'Video')+'" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>';
+  }
+  // A video shows once its release time has passed: the hosted file in Give2Brew2026/video/ if it's there, otherwise the Drive/YouTube link.
+  function embed(v){
+    if (!v) return Promise.resolve(null);
+    if (v.release && new Date() < new Date(v.release)) return Promise.resolve(null);
+    return exists(v.file).then(function(ok){
+      if (ok) return '<video src="'+v.file+'" controls playsinline preload="metadata" title="'+(v.title||'Video')+'"></video>';
+      return embedSrc(v);
+    });
   }
   function soon(title, when){ return '<div class="soon"><small>'+when+'</small><b>'+title+'</b></div>'; }
 
+  var shown = {};
+  function put(el, key, html){ if (shown[key] !== html){ shown[key] = html; el.innerHTML = html; } }
   function renderVideos(){
     var f = data.featured||{}, fp = $('featured-player');
     fp.className = 'player' + (f.aspect==='9:16' ? ' v' : '');
-    fp.innerHTML = embed(f) || soon('Why 1,000?','Coming Friday');
-    $('vgrid').innerHTML = (data.videos||[]).map(function(v){
-      return '<div class="vcard"><div class="player v">'+(embed(v)||soon('&#9654;', 'Drops '+v.drops))+'</div><h4>'+v.title+'</h4><p><span class="when">'+v.drops+'</span><br>'+v.blurb+'</p></div>';
-    }).join('');
-    var clips = (data.power10||[]).filter(function(c){return c.src && c.src.trim()});
-    $('p10').hidden = !clips.length;
-    $('p10grid').innerHTML = clips.map(function(c){ return '<div><div class="player v">'+embed(c)+'</div>'+(c.caption?'<p class="cap">'+c.caption+'</p>':'')+'</div>'; }).join('');
+    embed(f).then(function(h){ put(fp, 'featured', h || soon('Why 1,000?','Coming soon')); });
+    var vids = data.videos||[];
+    if ($('vgrid').children.length !== vids.length){
+      $('vgrid').innerHTML = vids.map(function(v,i){
+        return '<div class="vcard"><div class="player v" id="vp'+i+'"></div><h4>'+v.title+'</h4><p><span class="when">'+v.drops+'</span><br>'+v.blurb+'</p></div>';
+      }).join('');
+      shown = {featured: shown.featured};
+    }
+    vids.forEach(function(v,i){ embed(v).then(function(h){ put($('vp'+i), 'v'+i, h || soon('&#9654;', v.drops)); }); });
+    var n = counts().donors;
+    var clips = (data.power10||[]).filter(function(c){ return n >= (+c.at||0) && (c.file || (c.src||'').trim()); });
+    Promise.all(clips.map(embed)).then(function(hs){
+      var items = clips.map(function(c,i){ return hs[i] ? '<div><div class="player v">'+hs[i]+'</div>'+(c.caption?'<p class="cap">'+c.caption+'</p>':'')+'</div>' : ''; }).filter(Boolean);
+      $('p10').hidden = !items.length;
+      put($('p10grid'), 'p10', items.join(''));
+    });
   }
 
+  function loadLive(){
+    return fetch(LIVE_URL+'?t='+Date.now(), {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){ if (j) live = j; }).catch(function(){});
+  }
   function load(first){
-    fetch('../data/give2brew2026.json?t='+Date.now(), {cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
-      var vidsChanged = !data || JSON.stringify([d.featured,d.videos,d.power10]) !== JSON.stringify([data.featured,data.videos,data.power10]);
-      data = d; renderCount(); if (vidsChanged) renderVideos();
+    Promise.all([
+      fetch('../data/give2brew2026.json?t='+Date.now(), {cache:'no-store'}).then(function(r){return r.json()}),
+      loadLive()
+    ]).then(function(res){
+      data = res[0]; renderCount(); renderVideos();
     }).catch(function(){ if (first){ data = {donors:0, challenges:[], videos:[], power10:[], featured:{}}; renderCount(); renderVideos(); } });
   }
 
