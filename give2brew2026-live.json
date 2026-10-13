@@ -1,13 +1,13 @@
 {
- "checked": "2026-10-13T13:37:23+00:00",
+ "checked": "2026-10-13T13:42:32+00:00",
  "keeper": "github-actions",
  "ok": true,
  "error": "",
- "donors": 191,
- "dollars": 15760,
+ "donors": 196,
+ "dollars": 16175,
  "source": "https://engage.vassar.edu/portal/giving_day?cmd=getDonorInitiatives&campaign=9fa55dea-f4bd-7c4c-4354-5501dbfdf05b&cntxt=initiatives_list",
  "team_goal": 175,
- "updated_iso": "2026-10-13T13:37:23+00:00",
- "updated": "9:37 AM Tue",
+ "updated_iso": "2026-10-13T13:42:32+00:00",
+ "updated": "9:42 AM Tue",
  "test": false
 }
