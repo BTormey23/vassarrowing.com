@@ -376,13 +376,15 @@
     return best;
   }
 
+  // The live file is used whenever it exists: a count never goes down, so a reading that is a
+  // couple of hours old is still better than the manual fallback. Staleness only changes the label.
   function liveOk(){
-    if (!live || !live.ok || live.test || data.auto === false || !live.checked) return false;
-    return (new Date() - new Date(live.checked)) < 75*60000;   // ignore if the checker has gone quiet (pre-launch it runs every 30 min)
+    return !!(live && live.ok && !live.test && data.auto !== false && typeof live.donors === 'number');
   }
+  function liveStale(){ return !live || !live.checked || (new Date() - new Date(live.checked)) > 75*60000; }
   function counts(){
     var m = {donors: Math.max(0, +data.donors||0), dollars: data.dollars, updated: data.updated, auto: false};
-    if (liveOk() && +live.donors >= m.donors) m = {donors: +live.donors, dollars: live.dollars, updated: live.updated, auto: true};
+    if (liveOk() && +live.donors >= m.donors) m = {donors: +live.donors, dollars: live.dollars, updated: live.updated, auto: true, stale: liveStale()};
     return m;
   }
   function renderCount(){
@@ -396,7 +398,7 @@
     if (p==='live'){ var pc = pace(now); var e=document.createElement('span'); e.className='tick pace'; e.style.left=Math.min(100,pc/GOAL*100)+'%'; e.title='On pace for 1,000: about '+fmt(pc)+' by now'; bar.appendChild(e); }
     var meta = [];
     if (c.dollars) meta.push('<b>'+money(c.dollars)+'</b> raised');
-    if (c.updated) meta.push('Updated '+c.updated+(c.auto ? ' from Vassar\'s giving site' : ''));
+    if (c.updated) meta.push((c.stale ? 'As of ' : 'Updated ')+c.updated+(c.auto ? ' from Vassar\'s giving site' : ''));
     else if (p==='pre') meta.push('Early gifts are already landing. The count updates every few minutes.');
     $('count-meta').innerHTML = meta.join(' · ');
     var nx = nextUnlock(n), msg;

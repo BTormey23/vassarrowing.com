@@ -33,7 +33,7 @@ END = dt.datetime(2026, 10, 14, 13, 0, tzinfo=ET)
 LEAD = dt.timedelta(hours=2)       # start the fast loop a little early
 TAIL = dt.timedelta(minutes=45)    # keep checking after close for late-posted gifts
 EVERY = 300                        # seconds between checks inside the loop
-MAX_MINUTES = 340                  # one Actions job stays under the 6-hour limit
+MAX_MINUTES = 340                  # one Actions job stays under the 6-hour limit (a push restarts the clock)
 
 PORTAL = "https://engage.vassar.edu/portal/giving_day"
 CAMPAIGN = "9fa55dea-f4bd-7c4c-4354-5501dbfdf05b"      # Athletics Day of Giving 2026
