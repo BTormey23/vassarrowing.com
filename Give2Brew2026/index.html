@@ -82,6 +82,8 @@
 .vcard .player .soon b{font-size:30px;opacity:.85}
 .player .soon small{font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#F3C9D3}
 .featured h3{font-size:30px}
+.feat2{margin-top:34px}
+.feat2[hidden]{display:none}
 .featured p{margin-top:10px;color:var(--ink-2)}
 .vgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:34px}
 .vcard h4{font-family:var(--font-display);font-size:19px;font-weight:500;margin:10px 0 2px}
@@ -225,6 +227,14 @@
         <h3 style="margin-top:6px">Why 1,000?</h3>
         <p>Coach Wells on why he's asking for 1,000 donors this year, and why the team is going first.</p>
         <p><a class="btn btn-primary give-link" style="margin-top:6px" href="https://engage.vassar.edu/portal/giving_day" target="_blank" rel="noopener">Give to Vassar Rowing</a></p>
+      </div>
+    </div>
+    <div class="featured feat2" id="feat2" hidden>
+      <div class="player" id="feat2-player"></div>
+      <div>
+        <span class="eyebrow" id="feat2-by"></span>
+        <h3 style="margin-top:6px" id="feat2-title"></h3>
+        <p id="feat2-blurb"></p>
       </div>
     </div>
     <div class="vgrid" id="vgrid"></div>
@@ -460,12 +470,22 @@
     var f = data.featured||{}, fp = $('featured-player');
     fp.className = 'player' + (f.aspect==='9:16' ? ' v' : '');
     embed(f).then(function(h){ put(fp, 'featured', h || soon('Why 1,000?','Coming soon')); });
+    var f2 = data.featured2, f2box = $('feat2');
+    if (f2 && ((f2.src||'').trim() || f2.file)){
+      f2box.hidden = false;
+      $('feat2-player').className = 'player' + (f2.aspect==='9:16' ? ' v' : '');
+      $('feat2-by').textContent = f2.by||'';
+      $('feat2-title').textContent = f2.title||'';
+      $('feat2-blurb').textContent = f2.blurb||'';
+      $('feat2-blurb').hidden = !f2.blurb;
+      embed(f2).then(function(h){ put($('feat2-player'), 'featured2', h || soon(f2.title||'Video','Coming soon')); });
+    } else { f2box.hidden = true; }
     var vids = data.videos||[];
     if ($('vgrid').children.length !== vids.length){
       $('vgrid').innerHTML = vids.map(function(v,i){
         return '<div class="vcard"><div class="player v" id="vp'+i+'"></div><h4>'+v.title+'</h4><p><span class="when">'+v.drops+'</span><br>'+v.blurb+'</p></div>';
       }).join('');
-      shown = {featured: shown.featured};
+      shown = {featured: shown.featured, featured2: shown.featured2};
     }
     vids.forEach(function(v,i){ embed(v).then(function(h){ put($('vp'+i), 'v'+i, h || soon('&#9654;', v.drops)); }); });
     var n = counts().donors;
