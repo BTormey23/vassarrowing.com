@@ -198,7 +198,9 @@ def main():
     Anything else (a push, a manual run, the old --test flag): check now; if launch is still
     hours away, keep checking every 30 minutes for the rest of this job so early gifts show."""
     began = time.time()
-    if "--loop" not in sys.argv:
+    # Any run that starts inside the giving window (push, manual, or a hand-off from the previous
+    # run) does the full 5-minute loop. GitHub's scheduled runs can be late or skipped entirely.
+    if "--loop" not in sys.argv and dt.datetime.now(ET) < START - LEAD:
         cycle()
         while time.time() - began < MAX_MINUTES * 60 and dt.datetime.now(ET) < START - LEAD:
             time.sleep(1800)
