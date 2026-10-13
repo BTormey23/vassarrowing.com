@@ -1,12 +1,13 @@
 {
- "checked": "2026-10-09T19:59:24Z",
- "test": true,
+ "checked": "2026-10-13T00:32:13+00:00",
+ "test": false,
+ "keeper": "github-actions",
  "ok": true,
  "error": "",
- "donors": 405,
- "dollars": 52616,
- "source": "https://www.givecampus.com/schools/VassarCollege/vassar-athletics-day-of-giving-2025/pages/rowing",
- "keeper": "browser",
- "updated_iso": "2026-10-09T11:38:08Z",
- "updated": "7:38 AM Fri"
+ "donors": 31,
+ "dollars": 1025,
+ "source": "https://engage.vassar.edu/portal/giving_day?cmd=getDonorInitiatives&campaign=9fa55dea-f4bd-7c4c-4354-5501dbfdf05b&cntxt=initiatives_list",
+ "team_goal": 175,
+ "updated_iso": "2026-10-13T00:32:13+00:00",
+ "updated": "8:32 PM Mon"
 }
