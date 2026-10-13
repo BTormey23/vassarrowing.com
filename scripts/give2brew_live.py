@@ -1,19 +1,26 @@
-"""Live donor count for vassarrowing.com/Give2Brew2026, pulled from GiveCampus.
+"""Live donor count for vassarrowing.com/Give2Brew2026, pulled from Vassar's giving-day site.
 
-Runs in GitHub Actions (.github/workflows/give2brew-live.yml). During the giving
-window it checks Rowing's GiveCampus team page every 5 minutes and writes the
-donor count and dollars to `give2brew2026-live.json` on the `live-data` branch.
-The campaign page reads that file directly, so updates don't trigger a site
-rebuild and never collide with edits to the main branch.
+Vassar runs the 2026 Athletics Day of Giving on its own Slate portal
+(https://engage.vassar.edu/portal/giving_day), not GiveCampus. The portal loads
+its leaderboard from a plain endpoint that returns an HTML table:
 
-Settings live in data/give2brew2026.json on main (re-read every cycle):
-  "auto": false            -> stop publishing (page falls back to the manual count)
-  "givecampus_url": "..."  -> Rowing's team page (or the campaign page); if blank
-                              the script finds the 2026 campaign on Vassar's
-                              GiveCampus school page and picks the Rowing card.
+  https://engage.vassar.edu/portal/giving_day?cmd=getDonorInitiatives&campaign=<id>&cntxt=initiatives_list
 
-  python scripts/give2brew_live.py --test   # one check against last year's page
-  python scripts/give2brew_live.py --loop   # the giving-day loop
+  <tr><td>Rowing</td><td>30</td><td>$995</td><td>175</td><td>17%</td></tr>
+
+This script (run by .github/workflows/give2brew-live.yml) reads the Rowing row,
+cross-checks it against the Coach Wells challenge card ("30 of 500 Donors") on
+the challenges endpoint, and writes donors/dollars to `give2brew2026-live.json`
+on the `live-data` branch. The campaign page reads that file directly from
+raw.githubusercontent.com, so no site rebuild is involved.
+
+Settings in data/give2brew2026.json on main (re-read every cycle):
+  "auto": false     -> stop publishing (page falls back to the manual count)
+  "bot": false      -> stop this server-side checker (the browser Count Keeper takes over)
+  "campaign_id"     -> Slate campaign id, if Vassar ever changes it
+
+  python scripts/give2brew_live.py          # check now, then every 30 min until launch nears
+  python scripts/give2brew_live.py --loop   # the giving-day loop (every 5 min while the window is open)
 """
 import base64, datetime as dt, json, os, re, sys, time
 from zoneinfo import ZoneInfo
@@ -23,20 +30,18 @@ from bs4 import BeautifulSoup
 ET = ZoneInfo("America/New_York")
 START = dt.datetime(2026, 10, 13, 8, 0, tzinfo=ET)
 END = dt.datetime(2026, 10, 14, 13, 0, tzinfo=ET)
-LEAD = dt.timedelta(minutes=10)    # start checking a little early
+LEAD = dt.timedelta(hours=2)       # start the fast loop a little early
 TAIL = dt.timedelta(minutes=45)    # keep checking after close for late-posted gifts
-EVERY = 300                        # seconds between checks
+EVERY = 300                        # seconds between checks inside the loop
 MAX_MINUTES = 340                  # one Actions job stays under the 6-hour limit
 
-GC = "https://www.givecampus.com"
-SCHOOL = GC + "/schools/VassarCollege"
-GUESSES = [SCHOOL + "/vassar-athletics-day-of-giving-2026/pages/rowing",
-           SCHOOL + "/vassar-athletics-day-of-giving-2026"]
-TEST_URL = SCHOOL + "/vassar-athletics-day-of-giving-2025/pages/rowing"   # 405 donors, $52,616
-TEAM_RE = re.compile(r"\browing\b", re.I)
+PORTAL = "https://engage.vassar.edu/portal/giving_day"
+CAMPAIGN = "9fa55dea-f4bd-7c4c-4354-5501dbfdf05b"      # Athletics Day of Giving 2026
+TEAM_RE = re.compile(r"^\s*(men'?s\s*(and|&)\s*women'?s\s*)?rowing\s*$", re.I)
 BRANCH, LIVE_PATH, CONFIG_PATH = "live-data", "give2brew2026-live.json", "data/give2brew2026.json"
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/126.0 Safari/537.36 vassarrowing.com-live-count"}
+                    "Chrome/126.0 Safari/537.36 vassarrowing.com-live-count",
+      "Accept": "text/html,*/*", "Referer": PORTAL}
 
 REPO = os.environ.get("GITHUB_REPOSITORY", "BTormey23/vassarrowing.com")
 API = f"https://api.github.com/repos/{REPO}"
@@ -54,100 +59,45 @@ def get(url):
     return r
 
 
-def parse_team_page(html):
-    """Rowing's own GiveCampus page: #donor_count and #donation_count."""
-    soup = BeautifulSoup(html, "html.parser")
-    title = soup.title.get_text(" ", strip=True) if soup.title else ""
-    d = soup.select_one("#donor_count .goal_stat_count")
-    m = soup.select_one("#donation_count .goal_stat_count")
-    if not d:   # fallback: any stat whose label says Donors / Donated
-        for stat in soup.select(".goal_stat"):
-            lab = stat.select_one(".goal_stat_label")
-            val = stat.select_one(".goal_stat_count")
-            if lab and val and lab.get_text(strip=True).lower().startswith("donor") and not d:
-                d = val
-            if lab and val and lab.get_text(strip=True).lower().startswith("donated") and not m:
-                m = val
-    return title, num(d.get_text()) if d else None, num(m.get_text()) if m else None
+def leaderboard(campaign):
+    """Rowing's row on the Teams leaderboard: donors, dollars, team goal."""
+    url = f"{PORTAL}?cmd=getDonorInitiatives&campaign={campaign}&cntxt=initiatives_list"
+    soup = BeautifulSoup(get(url).text, "html.parser")
+    for tr in soup.select("table tr"):
+        tds = [td.get_text(" ", strip=True) for td in tr.find_all("td")]
+        if len(tds) >= 3 and TEAM_RE.search(tds[0]):
+            return {"donors": num(tds[1]), "dollars": num(tds[2]), "goal": num(tds[3]) if len(tds) > 3 else None, "source": url}
+    raise LookupError("no Rowing row on the Teams leaderboard")
 
 
-def rowing_card(html):
-    soup = BeautifulSoup(html, "html.parser")
-    for card in soup.select(".tiered_campaign"):
-        t = card.select_one(".tiered_campaign-title")
-        if t and TEAM_RE.search(t.get_text()):
-            img = card.select_one("[data-link]")
-            txt = card.get_text(" ", strip=True)
-            dm = re.search(r"([\d,]+)\s*Donors", txt)
-            mm = re.search(r"\$([\d,]+)\s*Donated", txt)
-            return (img["data-link"] if img else None), (num(dm.group(1)) if dm else None), (num(mm.group(1)) if mm else None)
-    return None
-
-
-def team_link_from_campaign(html):
-    """Campaign page: find the Rowing card's link (and its numbers as a fallback)."""
-    hit = rowing_card(html)
-    if hit:
-        return hit
-    cid = re.search(r"/campaigns/(\d+)/tiered_campaign_cards", html)   # cards load in a frame
-    if cid:
-        hit = rowing_card(get(f"{GC}/campaigns/{cid.group(1)}/tiered_campaign_cards?search=Rowing").text)
-        if hit:
-            return hit
-    return None, None, None
-
-
-def discover_campaign_urls():
-    """Look for a 2026 athletics campaign linked from Vassar's GiveCampus school page."""
+def challenge_count(campaign):
+    """Cross-check: the Coach Wells challenge card shows 'N of 500 Donors'."""
     try:
-        html = get(SCHOOL).text
+        html = get(f"{PORTAL}?cmd=getChallenges&cntxt=challenges&campaign={campaign}").text
     except Exception:
-        return []
-    links = set(re.findall(r'href="(/schools/VassarCollege/[^"#?]+)"', html))
-    keep = [GC + l for l in links if "2026" in l and re.search(r"athlet|give2brew|giving-day|day-of-giving", l, re.I)]
-    return sorted(keep)
+        return None
+    text = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)
+    m = re.search(r"Coach Wells.{0,600}?(\d[\d,]*)\s+of\s+500\s+Donors", text, re.I | re.S)
+    return num(m.group(1)) if m else None
 
 
-def read_count(configured=""):
-    tried = []
-    for url in ([configured] if configured else []) + GUESSES + discover_campaign_urls():
-        if not url or any(t.startswith(url + " ->") for t in tried):
-            continue
-        try:
-            r = requests.get(url, headers=UA, timeout=30, allow_redirects=True)
-        except Exception as e:
-            tried.append(f"{url} -> {type(e).__name__}")
-            continue
-        title = re.search(r"<title>([^<]{0,80})", r.text or "")
-        tried.append(f"{url} -> HTTP {r.status_code}, {len(r.text)} chars, ends at {r.url}, title: {title.group(1).strip() if title else '-'}")
-        if not r.ok:
-            continue
-        final = r.url.rstrip("/")
-        if final == SCHOOL:          # GiveCampus redirects unpublished campaigns to the school page
-            continue
-        if "/pages/" in final:
-            title, donors, dollars = parse_team_page(r.text)
-            if donors is not None and TEAM_RE.search(title):
-                return {"donors": donors, "dollars": dollars, "source": final}
-            continue
-        link, donors, dollars = team_link_from_campaign(r.text)
-        if link:
-            try:
-                title, d2, m2 = parse_team_page(get(link).text)
-                if d2 is not None:
-                    return {"donors": d2, "dollars": m2, "source": link}
-            except Exception:
-                pass
-        if donors is not None:
-            return {"donors": donors, "dollars": dollars, "source": final}
-    return {"error": "Rowing's 2026 GiveCampus page not found yet", "tried": tried}
+def read_count(campaign):
+    try:
+        res = leaderboard(campaign)
+    except Exception as e:
+        return {"error": f"leaderboard read failed: {type(e).__name__}: {str(e)[:160]}"}
+    if res["donors"] is None:
+        return {"error": "Rowing row found but no donor number"}
+    alt = challenge_count(campaign)
+    if alt is not None and alt != res["donors"]:
+        res["challenge_count"] = alt      # recorded for the log; the leaderboard is the number we show
+    return res
 
 
 # ---------- GitHub (live-data branch via the contents API) ----------
 
 def gh(method, path, **kw):
-    r = requests.request(method, API + path, headers=GH, timeout=30, **kw)
-    return r
+    return requests.request(method, API + path, headers=GH, timeout=30, **kw)
 
 
 def load_config():
@@ -193,24 +143,24 @@ def stamp(now):
     return now.astimezone(ET).strftime("%-I:%M %p %a")
 
 
-def cycle(test=False):
+def cycle():
     now = dt.datetime.now(dt.timezone.utc)
     cfg = load_config()
-    if (cfg.get("auto") is False or cfg.get("bot") is False) and not test:
+    if cfg.get("auto") is False or cfg.get("bot") is False:
         print("server-side checking is off in data/give2brew2026.json; skipping")
         return
-    res = read_count(TEST_URL if test else (cfg.get("givecampus_url") or "").strip())
+    res = read_count((cfg.get("campaign_id") or CAMPAIGN).strip())
     ensure_branch()
     prev, sha = load_live()
-    if bool(prev.get("test")) != bool(test):
-        prev = {"checked": prev.get("checked")}    # never mix test numbers with live ones
-    out = {k: v for k, v in prev.items() if k != "tried"}
+    if prev.get("test"):
+        prev = {}                      # drop any leftover GiveCampus test reading
+    out = {k: v for k, v in prev.items() if k not in ("tried", "test")}
     out["checked"] = now.isoformat(timespec="seconds")
-    out["test"] = bool(test)
+    out["test"] = False
+    out["keeper"] = "github-actions"
     if "error" in res:
-        out["ok"] = False
+        out["ok"] = bool(prev.get("ok")) and "donors" in prev   # keep showing the last good number
         out["error"] = res["error"]
-        out["tried"] = res.get("tried", [])
     else:
         d, m = res["donors"], res["dollars"]
         if prev.get("donors") and d < prev["donors"]:
@@ -221,32 +171,42 @@ def cycle(test=False):
         else:
             changed = (d, m) != (prev.get("donors"), prev.get("dollars"))
             out.update(ok=True, error="", donors=d, dollars=m, source=res["source"])
+            if res.get("goal"):
+                out["team_goal"] = res["goal"]
+            if "challenge_count" in res:
+                out["challenge_count"] = res["challenge_count"]
+            else:
+                out.pop("challenge_count", None)
             if changed or not prev.get("updated_iso"):
                 out["updated_iso"] = now.isoformat(timespec="seconds")
                 out["updated"] = stamp(now)
     # write when numbers change, on errors, and at least every 30 min as a heartbeat
     last = prev.get("checked")
-    stale = not last or (now - dt.datetime.fromisoformat(last)).total_seconds() > 1800
+    try:
+        stale = not last or (now - dt.datetime.fromisoformat(last)).total_seconds() > 1800
+    except Exception:
+        stale = True
     if out.get("donors") != prev.get("donors") or out.get("dollars") != prev.get("dollars") \
-            or out.get("ok") != prev.get("ok") or "test" not in prev or stale or test:
-        label = "TEST " if test else ""
-        publish(out, sha, f"{label}live count: {out.get('donors')} donors, ${out.get('dollars')}" if out.get("ok")
-                else f"{label}live count: {out.get('error')}")
+            or out.get("ok") != prev.get("ok") or out.get("error") != prev.get("error") or stale:
+        publish(out, sha, f"live count: {out.get('donors')} donors, ${out.get('dollars')}" if not out.get("error")
+                else f"live count: {out.get('error')}")
     print(json.dumps(out))
 
 
 def main():
-    if "--test" in sys.argv:
-        cycle(test=True)
-        return
+    """--loop: the giving-day loop (5-minute checks while the window is open).
+    Anything else (a push, a manual run, the old --test flag): check now; if launch is still
+    hours away, keep checking every 30 minutes for the rest of this job so early gifts show."""
+    began = time.time()
     if "--loop" not in sys.argv:
         cycle()
+        while time.time() - began < MAX_MINUTES * 60 and dt.datetime.now(ET) < START - LEAD:
+            time.sleep(1800)
+            try:
+                cycle()
+            except Exception as e:
+                print("cycle failed:", e)
         return
-    cfg = load_config()
-    if cfg.get("bot") is False or cfg.get("auto") is False:
-        print("server-side checking is off in data/give2brew2026.json (the browser Count Keeper handles it)")
-        return
-    began = time.time()
     while time.time() - began < MAX_MINUTES * 60:
         now = dt.datetime.now(ET)
         if now > END + TAIL:
@@ -257,9 +217,13 @@ def main():
                 cycle()
             except Exception as e:
                 print("cycle failed:", e)
+            time.sleep(EVERY)
         else:
-            print("waiting for the window to open")
-        time.sleep(EVERY)
+            try:
+                cycle()
+            except Exception as e:
+                print("cycle failed:", e)
+            time.sleep(1800)
 
 
 if __name__ == "__main__":
