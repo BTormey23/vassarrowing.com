@@ -163,9 +163,16 @@ def cycle():
         out["error"] = res["error"]
     else:
         d, m = res["donors"], res["dollars"]
-        if prev.get("donors") and d < prev["donors"]:
-            print(f"ignoring a lower count ({d} < {prev['donors']})")   # counts never go down
-            d, m = prev["donors"], prev.get("dollars", m)
+        # Athletics may scrub duplicate donors during the event, so a lower count is real:
+        # show it, and log every drop (donors or dollars) so the organizers can see what was removed.
+        pd, pm = prev.get("donors"), prev.get("dollars")
+        if (pd and d < pd) or (pm and m is not None and m < pm):
+            drops = list(prev.get("drops", []))
+            drops.append({"at": now.isoformat(timespec="seconds"), "et": stamp(now),
+                          "donors_from": pd, "donors_to": d, "dollars_from": pm, "dollars_to": m})
+            out["drops"] = drops[-200:]
+            print(f"DROP: donors {pd} -> {d}, dollars {pm} -> {m}")
+        out["peak_donors"] = max(int(prev.get("peak_donors") or 0), int(pd or 0), int(d or 0))
         if not (0 <= d <= 20000):
             out.update(ok=False, error=f"implausible count {d}")
         else:
@@ -231,4 +238,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-# keep-alive: 2
+# keep-alive: 3
