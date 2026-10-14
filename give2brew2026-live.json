@@ -1,15 +1,15 @@
 {
- "checked": "2026-10-14T02:45:31+00:00",
+ "checked": "2026-10-14T02:50:37+00:00",
  "keeper": "github-actions",
  "ok": true,
  "error": "",
- "donors": 583,
- "dollars": 53468,
+ "donors": 584,
+ "dollars": 53513,
  "source": "https://engage.vassar.edu/portal/giving_day?cmd=getDonorInitiatives&campaign=9fa55dea-f4bd-7c4c-4354-5501dbfdf05b&cntxt=initiatives_list",
  "team_goal": 175,
- "updated_iso": "2026-10-14T02:45:31+00:00",
- "updated": "10:45 PM Tue",
- "peak_donors": 583,
+ "updated_iso": "2026-10-14T02:50:37+00:00",
+ "updated": "10:50 PM Tue",
+ "peak_donors": 584,
  "challenge_count": 500,
  "test": false
 }
