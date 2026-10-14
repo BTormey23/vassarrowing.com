@@ -1,5 +1,5 @@
 {
-  "_help": "Live data for vassarrowing.com/Give2Brew2026. The donor count and dollars come from Vassar's giving-day site (engage.vassar.edu/portal/giving_day, the Rowing row on the Teams leaderboard), read by the GitHub Action .github/workflows/give2brew-live.yml every 30 minutes before launch and every 5 minutes during the window, and written to give2brew2026-live.json on the live-data branch. Set bot to false to stop that checker; set auto to false to show the manual donors/dollars/updated below instead. campaign_id is Vassar's Slate campaign id. Videos: upload files to Give2Brew2026/video/ with the names below and they appear on their own at the release time; a Drive or YouTube ID in src is the fallback. featured2 is the second wide video under Why 1,000? (title, by and blurb are editable; remove its src to hide it). Power 10 clips appear once the donor count reaches their 'at' number. Never put an unrevealed challenge's details in this file: it is public.",
+  "_help": "Live data for vassarrowing.com/Give2Brew2026. The donor count and dollars come from Vassar's giving-day site (engage.vassar.edu/portal/giving_day, the Rowing row on the Teams leaderboard), read by the GitHub Action .github/workflows/give2brew-live.yml every 30 minutes before launch and every 5 minutes during the window, and written to give2brew2026-live.json on the live-data branch. Set bot to false to stop that checker; set auto to false to show the manual donors/dollars/updated below instead. campaign_id is Vassar's Slate campaign id. Videos: upload files to Give2Brew2026/video/ with the names below and they appear on their own at the release time; a Drive or YouTube ID in src is the fallback. featured2 and featured3 are the wide videos under Why 1,000? (title, by and blurb are editable; remove src/file to hide one). Power 10 clips appear once the donor count reaches their 'at' number. Never put an unrevealed challenge's details in this file: it is public.",
   "auto": true,
   "bot": true,
   "campaign_id": "9fa55dea-f4bd-7c4c-4354-5501dbfdf05b",
@@ -58,17 +58,26 @@
     "aspect": "16:9"
   },
   "featured2": {
-    "by": "Vassar Rowing",
-    "title": "More from Vassar Rowing",
+    "by": "Coach Peter Wells",
+    "title": "Tuesday Morning",
     "blurb": "",
     "provider": "youtube",
     "src": "2BUNU7owu3c",
     "aspect": "16:9"
   },
+  "featured3": {
+    "by": "Coach Peter Wells",
+    "title": "Wednesday Morning",
+    "blurb": "",
+    "file": "video/wed-morning.mp4",
+    "provider": "drive",
+    "src": "",
+    "aspect": "16:9"
+  },
   "videos": [
     {"n": 1, "title": "Sit Ready", "blurb": "The teaser. Blades squared, silence.", "drops": "Before launch", "release": "2026-10-11T18:00:00-04:00", "file": "video/V1-teaser.mp4", "provider": "drive", "src": "", "aspect": "9:16"},
     {"n": 2, "title": "I'm One of 1000", "blurb": "Every athlete, one at a time. They gave first.", "drops": "Tue 8:00 AM", "release": "2026-10-13T08:00:00-04:00", "file": "video/V2-rollcall.mp4", "provider": "drive", "src": "", "aspect": "9:16"},
-    {"n": 3, "title": "Meet the Crew", "blurb": "Why this team, and why they're asking you.", "drops": "Tue noon", "release": "2026-10-13T12:00:00-04:00", "file": "video/V3-meet-the-crew.mp4", "provider": "drive", "src": "", "aspect": "9:16"},
+    {"n": 3, "title": "What's Next", "blurb": "The team on what they're most excited for next.", "drops": "Tue afternoon", "release": "2026-10-13T12:00:00-04:00", "file": "video/V3-whats-next.mp4", "provider": "drive", "src": "", "aspect": "9:16"},
     {"n": 4, "title": "Rowing News Team", "blurb": "Breaking news from the boathouse.", "drops": "Tue ~7 PM", "release": "2026-10-13T19:00:00-04:00", "file": "video/V4-rowing-news.mp4", "provider": "drive", "src": "", "aspect": "9:16"},
     {"n": 5, "title": "5:02 AM", "blurb": "Practice o'clock. The team is up. Are you?", "drops": "Wed 5 AM", "release": "2026-10-14T05:00:00-04:00", "file": "video/V5-502am.mp4", "provider": "drive", "src": "", "aspect": "9:16"}
   ],
