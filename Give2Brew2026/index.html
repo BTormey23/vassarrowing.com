@@ -237,6 +237,14 @@
         <p id="feat2-blurb"></p>
       </div>
     </div>
+    <div class="featured feat2" id="feat3" hidden>
+      <div class="player" id="feat3-player"></div>
+      <div>
+        <span class="eyebrow" id="feat3-by"></span>
+        <h3 style="margin-top:6px" id="feat3-title"></h3>
+        <p id="feat3-blurb"></p>
+      </div>
+    </div>
     <div class="vgrid" id="vgrid"></div>
     <div class="p10" id="p10" hidden>
       <h3>Power 10 thank-yous</h3>
@@ -283,7 +291,7 @@
     <h2>When to be at the start</h2>
     <div class="sched" id="sched">
       <div data-t="2026-10-13T08:00:00-04:00"><time>Tue Oct 13 · 8:00 AM</time><b>Attention… Row.</b> <span>The team gives first. Video: I'm One of 1000.</span></div>
-      <div data-t="2026-10-13T12:00:00-04:00"><time>Tue · Noon</time><b>Meet the Crew</b> <span>Midday count from the captains.</span></div>
+      <div data-t="2026-10-13T12:00:00-04:00"><time>Tue · Noon</time><b>What's Next</b> <span>The team on what they're excited for.</span></div>
       <div data-t="2026-10-13T19:00:00-04:00"><time>Tue · ~7:00 PM</time><b>Evening Power 10</b> <span>Rowing News Team reports. Can we pass last year before bedtime?</span></div>
       <div data-t="2026-10-14T05:02:00-04:00"><time>Wed Oct 14 · 5:02 AM</time><b>Practice o'clock</b> <span>Last year at this hour we were at 328. Eight hours left.</span></div>
       <div data-t="2026-10-14T10:30:00-04:00"><time>Wed · 10:30 AM</time><b>Final call</b> <span>Two and a half hours to go.</span></div>
@@ -466,26 +474,30 @@
 
   var shown = {};
   function put(el, key, html){ if (shown[key] !== html){ shown[key] = html; el.innerHTML = html; } }
+  // Extra wide videos under Why 1,000? (featured2, featured3): shown when they have a src or a hosted file.
+  function wide(f, id, key){
+    var box = $(id);
+    if (!(f && ((f.src||'').trim() || f.file))){ box.hidden = true; return; }
+    box.hidden = false;
+    $(id+'-player').className = 'player' + (f.aspect==='9:16' ? ' v' : '');
+    $(id+'-by').textContent = f.by||'';
+    $(id+'-title').textContent = f.title||'';
+    $(id+'-blurb').textContent = f.blurb||'';
+    $(id+'-blurb').hidden = !f.blurb;
+    embed(f).then(function(h){ put($(id+'-player'), key, h || soon(f.title||'Video','Coming soon')); });
+  }
   function renderVideos(){
     var f = data.featured||{}, fp = $('featured-player');
     fp.className = 'player' + (f.aspect==='9:16' ? ' v' : '');
     embed(f).then(function(h){ put(fp, 'featured', h || soon('Why 1,000?','Coming soon')); });
-    var f2 = data.featured2, f2box = $('feat2');
-    if (f2 && ((f2.src||'').trim() || f2.file)){
-      f2box.hidden = false;
-      $('feat2-player').className = 'player' + (f2.aspect==='9:16' ? ' v' : '');
-      $('feat2-by').textContent = f2.by||'';
-      $('feat2-title').textContent = f2.title||'';
-      $('feat2-blurb').textContent = f2.blurb||'';
-      $('feat2-blurb').hidden = !f2.blurb;
-      embed(f2).then(function(h){ put($('feat2-player'), 'featured2', h || soon(f2.title||'Video','Coming soon')); });
-    } else { f2box.hidden = true; }
+    wide(data.featured2, 'feat2', 'featured2');
+    wide(data.featured3, 'feat3', 'featured3');
     var vids = data.videos||[];
     if ($('vgrid').children.length !== vids.length){
       $('vgrid').innerHTML = vids.map(function(v,i){
         return '<div class="vcard"><div class="player v" id="vp'+i+'"></div><h4>'+v.title+'</h4><p><span class="when">'+v.drops+'</span><br>'+v.blurb+'</p></div>';
       }).join('');
-      shown = {featured: shown.featured, featured2: shown.featured2};
+      shown = {featured: shown.featured, featured2: shown.featured2, featured3: shown.featured3};
     }
     vids.forEach(function(v,i){ embed(v).then(function(h){ put($('vp'+i), 'v'+i, h || soon('&#9654;', v.drops)); }); });
     var n = counts().donors;
