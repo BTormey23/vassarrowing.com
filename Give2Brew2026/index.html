@@ -151,6 +151,27 @@
 .give-bar .t b{font-family:var(--font-display);font-size:19px;font-weight:600}
 @media (max-width:560px){.give-bar .t{font-size:13.5px}.give-bar .t b{font-size:17px}}
 .give-bar .btn{background:#fff;color:var(--burg-deep);border-color:#fff;padding:10px 18px;font-size:15.5px;white-space:nowrap}
+/* results (shown after giving closes, from data.results) */
+.results{background:var(--surface);border-bottom:1px solid var(--line)}
+.results[hidden]{display:none}
+.results .wrap{padding-block:56px 48px}
+.results h2{font-size:clamp(38px,6vw,64px);line-height:1.02;margin-top:8px}
+.results .lede{font-size:clamp(18px,2vw,21px);max-width:62ch;margin-top:14px;color:var(--ink)}
+.r-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.r-stat{border:1px solid var(--line);border-radius:12px;padding:18px 16px;background:var(--ground)}
+.r-stat b{display:block;font-family:var(--font-display);font-size:clamp(34px,4.4vw,48px);font-weight:600;line-height:1;color:var(--burg);font-variant-numeric:tabular-nums}
+.r-stat span{display:block;margin-top:8px;font-size:14.5px;color:var(--ink-2);line-height:1.35}
+.r-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;margin-top:30px}
+.r-cols h3{font-size:22px}
+.r-miles{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.r-miles li{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:baseline;font-size:15.5px;color:var(--ink-2)}
+.r-miles li b{font-family:var(--font-display);font-size:20px;color:var(--burg);font-variant-numeric:tabular-nums}
+.r-miles li.miss b{color:var(--muted)}
+.r-others p{margin-top:12px;font-size:15.5px;color:var(--ink-2)}
+.r-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.r-links a{font-size:15px;padding:9px 16px}
+.r-thanks{margin-top:26px;padding:16px 18px;border-radius:10px;background:var(--rose-soft);font-size:16.5px;color:var(--ink)}
+@media (max-width:860px){.r-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.r-cols{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -162,6 +183,20 @@
     </div>
   </div>
 </nav>
+
+<section class="results" id="results" hidden aria-labelledby="results-title">
+  <div class="wrap">
+    <span class="eyebrow" id="results-eyebrow"></span>
+    <h2 id="results-title"></h2>
+    <p class="lede" id="results-lede"></p>
+    <div class="r-stats" id="results-stats"></div>
+    <div class="r-cols">
+      <div><h3 id="results-miles-h"></h3><ul class="r-miles" id="results-miles"></ul></div>
+      <div class="r-others"><h3 id="results-others-h"></h3><div id="results-others"></div><div class="r-links" id="results-links"></div></div>
+    </div>
+    <p class="r-thanks" id="results-thanks"></p>
+  </div>
+</section>
 
 <header class="g-hero">
   <img src="../photos/2026/group-photo.jpg" alt="">
@@ -243,6 +278,14 @@
         <span class="eyebrow" id="feat3-by"></span>
         <h3 style="margin-top:6px" id="feat3-title"></h3>
         <p id="feat3-blurb"></p>
+      </div>
+    </div>
+    <div class="featured feat2" id="feat4" hidden>
+      <div class="player" id="feat4-player"></div>
+      <div>
+        <span class="eyebrow" id="feat4-by"></span>
+        <h3 style="margin-top:6px" id="feat4-title"></h3>
+        <p id="feat4-blurb"></p>
       </div>
     </div>
     <div class="vgrid" id="vgrid"></div>
@@ -474,7 +517,7 @@
 
   var shown = {};
   function put(el, key, html){ if (shown[key] !== html){ shown[key] = html; el.innerHTML = html; } }
-  // Extra wide videos under Why 1,000? (featured2, featured3): shown when they have a src or a hosted file.
+  // Extra wide videos under Why 1,000? (featured2, featured3, featured4): shown when they have a src or a hosted file.
   function wide(f, id, key){
     var box = $(id);
     if (!(f && ((f.src||'').trim() || f.file))){ box.hidden = true; return; }
@@ -492,12 +535,13 @@
     embed(f).then(function(h){ put(fp, 'featured', h || soon('Why 1,000?','Coming soon')); });
     wide(data.featured2, 'feat2', 'featured2');
     wide(data.featured3, 'feat3', 'featured3');
+    wide(data.featured4, 'feat4', 'featured4');
     var vids = data.videos||[];
     if ($('vgrid').children.length !== vids.length){
       $('vgrid').innerHTML = vids.map(function(v,i){
         return '<div class="vcard"><div class="player v" id="vp'+i+'"></div><h4>'+v.title+'</h4><p><span class="when">'+v.drops+'</span><br>'+v.blurb+'</p></div>';
       }).join('');
-      shown = {featured: shown.featured, featured2: shown.featured2, featured3: shown.featured3};
+      shown = {featured: shown.featured, featured2: shown.featured2, featured3: shown.featured3, featured4: shown.featured4};
     }
     vids.forEach(function(v,i){ embed(v).then(function(h){ put($('vp'+i), 'v'+i, h || soon('&#9654;', v.drops)); }); });
     var n = counts().donors;
@@ -512,12 +556,32 @@
   function loadLive(){
     return fetch(LIVE_URL+'?t='+Date.now(), {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){ if (j) live = j; }).catch(function(){});
   }
+  // Final results block at the top of the page (data.results). Hidden until "show" is true;
+  // add ?preview=results to the URL to see a draft before it goes live.
+  function renderResults(){
+    var r = data.results, box = $('results');
+    var preview = /[?&]preview=results\b/.test(location.search);
+    if (!r || !(r.show || preview)){ box.hidden = true; return; }
+    box.hidden = false;
+    $('results-eyebrow').textContent = r.eyebrow||'';
+    $('results-title').textContent = r.title||'';
+    $('results-lede').innerHTML = r.lede||'';
+    $('results-stats').innerHTML = (r.stats||[]).map(function(x){ return '<div class="r-stat"><b>'+x.n+'</b><span>'+x.label+'</span></div>'; }).join('');
+    $('results-miles-h').textContent = r.milestones_title||'';
+    $('results-miles').innerHTML = (r.milestones||[]).map(function(m){ return '<li'+(m.missed?' class="miss"':'')+'><b>'+m.at+'</b><span>'+m.text+'</span></li>'; }).join('');
+    $('results-others-h').textContent = r.others_title||'';
+    $('results-others').innerHTML = (r.others||[]).map(function(t){ return '<p>'+t+'</p>'; }).join('');
+    $('results-links').innerHTML = (r.links||[]).map(function(l){ return '<a class="btn btn-ghost" href="'+l.url+'" target="_blank" rel="noopener">'+l.text+'</a>'; }).join('');
+    $('results-thanks').innerHTML = r.thanks||'';
+    $('results-thanks').hidden = !r.thanks;
+  }
+
   function load(first){
     Promise.all([
       fetch('../data/give2brew2026.json?t='+Date.now(), {cache:'no-store'}).then(function(r){return r.json()}),
       loadLive()
     ]).then(function(res){
-      data = res[0]; renderCount(); renderVideos();
+      data = res[0]; renderResults(); renderCount(); renderVideos();
     }).catch(function(){ if (first){ data = {donors:0, challenges:[], videos:[], power10:[], featured:{}}; renderCount(); renderVideos(); } });
   }
 
