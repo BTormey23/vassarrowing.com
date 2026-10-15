@@ -7,9 +7,12 @@
 <script>
 (function(){
   var p = location.pathname.toLowerCase().replace(/\/+$/, '');
-  if (p === '/give2brew2026' || p === '/give2brew' || p === '/oneof1000' || p.indexOf('/give2brew2026/') === 0) {
-    location.replace('/Give2Brew2026/' + location.search + location.hash);
-  }
+  var m = p.match(/^\/give2brew(\d{4})(\/|$)/), to = null;
+  if (m) to = '/Give2Brew' + m[1] + '/';
+  else if (p === '/give2brew' || p.indexOf('/give2brew/') === 0) to = '/Give2Brew/';
+  else if (p === '/oneof1000') to = '/Give2Brew2026/';
+  // only redirect when it changes the address (a year with no page yet just shows this page)
+  if (to && to !== location.pathname) location.replace(to + location.search + location.hash);
 })();
 </script>
 <link rel="stylesheet" href="/styles.css">
@@ -18,7 +21,7 @@
 <main class="wrap" style="padding-block:96px">
   <span class="eyebrow">Vassar Rowing</span>
   <h1 style="font-size:44px;margin-top:10px">Caught a crab.</h1>
-  <p class="lede" style="margin-top:14px">That page isn't here. Head back to <a href="/">vassarrowing.com</a>, or go straight to <a href="/Give2Brew2026/">ONE OF 1000</a>.</p>
+  <p class="lede" style="margin-top:14px">That page isn't here. Head back to <a href="/">vassarrowing.com</a>, or see every year of <a href="/Give2Brew/">#Give2Brew</a>.</p>
 </main>
 </body>
 </html>

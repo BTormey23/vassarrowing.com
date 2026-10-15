@@ -1,17 +1,17 @@
 {
-  "_help": "Live data for vassarrowing.com/Give2Brew2026. The donor count and dollars come from Vassar's giving-day site (engage.vassar.edu/portal/giving_day, the Rowing row on the Teams leaderboard), read by the GitHub Action .github/workflows/give2brew-live.yml every 30 minutes before launch and every 5 minutes during the window, and written to give2brew2026-live.json on the live-data branch. Set bot to false to stop that checker; set auto to false to show the manual donors/dollars/updated below instead. campaign_id is Vassar's Slate campaign id. Videos: upload files to Give2Brew2026/video/ with the names below and they appear on their own at the release time; a Drive or YouTube ID in src is the fallback. featured2, featured3 and featured4 are the wide videos under Why 1,000? (title, by and blurb are editable; remove src/file to hide one). Power 10 clips appear once the donor count reaches their 'at' number. results is the final-results block at the top of the page: set show to true to publish it (preview a draft with ?preview=results). Never put an unrevealed challenge's details in this file: it is public.",
-  "auto": true,
-  "bot": true,
+  "_help": "Live data for vassarrowing.com/Give2Brew2026. The donor count and dollars come from Vassar's giving-day site (engage.vassar.edu/portal/giving_day, the Rowing row on the Teams leaderboard), read by the GitHub Action .github/workflows/give2brew-live.yml every 30 minutes before launch and every 5 minutes during the window, and written to give2brew2026-live.json on the live-data branch. Set bot to false to stop that checker; set auto to false to show the manual donors/dollars/updated below instead (after the 2026 close both are off and the final numbers are frozen below). campaign_id is Vassar's Slate campaign id. Videos: upload files to Give2Brew2026/video/ with the names below and they appear on their own at the release time; a Drive or YouTube ID in src is the fallback. featured2, featured3 and featured4 are the wide videos under Why 1,000? (title, by and blurb are editable; remove src/file to hide one). Power 10 clips appear once the donor count reaches their 'at' number. results is the final-results block at the top of the page: set show to true to publish it (preview a draft with ?preview=results). Never put an unrevealed challenge's details in this file: it is public.",
+  "auto": false,
+  "bot": false,
   "campaign_id": "9fa55dea-f4bd-7c4c-4354-5501dbfdf05b",
-  "updated": "",
-  "donors": 0,
-  "dollars": null,
+  "updated": "Wed Oct 14 at the 1 PM close (final)",
+  "donors": 730,
+  "dollars": 63284,
   "note": "",
   "results": {
-    "show": false,
+    "show": true,
     "eyebrow": "#Give2Brew 2026 · Final results",
     "title": "730 of us. Thank you.",
-    "lede": "For 29 hours on October 13–14, rowers and coxswains from every era, parents, spouses, kids and friends stood up for Vassar Rowing. <b>730 people gave $63,284</b>: more donors than any other Vassar team, and 80% more than the 405 who gave last year.",
+    "lede": "For 29 hours on October 13–14, rowers and coxswains from every era, parents, spouses, kids and friends stood up for Vassar Rowing. <b>730 people gave $63,284</b>: more donors than any other Vassar team, and 80% more than the 405 who gave last year. Along the way, our matchers added $15,000 in challenge gifts.",
     "stats": [
       {
         "n": "730",
@@ -46,7 +46,7 @@
       },
       {
         "at": "700",
-        "text": "Crossed Wednesday morning."
+        "text": "Crossed Wednesday morning, completing $4,000 of Sue Wells's challenge: $1,000 at every 50 donors past 500."
       },
       {
         "at": "1,000",
@@ -93,24 +93,30 @@
       "text": "$1,000 when rowing reaches its team goal of 175 donors, from Winston and Elizabeth Clement '09."
     },
     {
-      "revealed": false,
-      "range": "501–750",
-      "reveal": "Revealed at 500 donors"
+      "revealed": true,
+      "name": "Sue Wells",
+      "kind": "per",
+      "every": 50,
+      "amount": 1000,
+      "from": 501,
+      "to": 750,
+      "max": 5000,
+      "text": "$1,000 at every 50 donors from 501 to 750."
     },
     {
       "revealed": false,
       "range": "751–875",
-      "reveal": "Revealed at 750 donors"
+      "reveal": "Not reached in 2026"
     },
     {
       "revealed": false,
       "range": "876–1,000",
-      "reveal": "Revealed at 750 donors"
+      "reveal": "Not reached in 2026"
     },
     {
       "revealed": false,
       "range": "Overnight",
-      "reveal": "Revealed Tuesday evening"
+      "reveal": "Not revealed in 2026"
     }
   ],
   "featured": {
