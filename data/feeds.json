@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-14T15:12:27+00:00",
+ "updated": "2026-10-15T15:06:06+00:00",
  "events": [
   {
    "date": "2026-10-24",
@@ -10,6 +10,12 @@
   }
  ],
  "news": [
+  {
+   "date": "2026-10-14",
+   "title": "Vassar Athletics Completes Record-Breaking Day Of Giving",
+   "url": "https://vassarathletics.com/news/2026/10/14/baseball-vassar-athletics-completes-record-breaking-athletics-day-of-giving.aspx",
+   "squad": "Women's"
+  },
   {
    "date": "2026-05-10",
    "title": "Men’s Rowing Concludes Season At National Invitational Rowing Championships",
@@ -110,12 +116,6 @@
    "date": "2025-10-05",
    "title": "Women’s Rowing Competes At Head Of The Riverfront",
    "url": "https://vassarathletics.com/news/2025/10/5/womens-rowing-womens-rowing-competes-at-head-of-the-riverfront.aspx",
-   "squad": "Women's"
-  },
-  {
-   "date": "2025-05-08",
-   "title": "Gelb and Keker Claim Matthew Vassar Honors At Annual Awards Ceremony",
-   "url": "https://vassarathletics.com/news/2025/5/8/general-gelb-and-keker-claim-matthew-vassar-honors-at-annual-awards-ceremony.aspx",
    "squad": "Women's"
   }
  ],
