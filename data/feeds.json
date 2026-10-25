@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-24T14:02:17+00:00",
+ "updated": "2026-10-25T14:25:51+00:00",
  "events": [
   {
    "date": "2026-10-24",
@@ -10,6 +10,18 @@
   }
  ],
  "news": [
+  {
+   "date": "2026-10-24",
+   "title": "Women’s Rowing Competes At Head Of The Fish",
+   "url": "https://vassarathletics.com/news/2026/10/24/womens-rowing-womens-rowing-competes-at-head-of-the-fish.aspx",
+   "squad": "Women's"
+  },
+  {
+   "date": "2026-10-24",
+   "title": "Brewers Take On Head Of The Fish",
+   "url": "https://vassarathletics.com/news/2026/10/24/mens-rowing-brewers-take-on-head-of-the-fish.aspx",
+   "squad": "Men's"
+  },
   {
    "date": "2026-10-14",
    "title": "Vassar Athletics Completes Record-Breaking Day Of Giving",
@@ -101,21 +113,9 @@
    "squad": "Women's"
   },
   {
-   "date": "2025-10-19",
-   "title": "Men’s Rowing Races At Head Of The Charles",
-   "url": "https://vassarathletics.com/news/2025/10/19/mens-rowing-mens-rowing-races-at-head-of-the-charles.aspx",
-   "squad": "Men's"
-  },
-  {
    "date": "2025-10-15",
    "title": "Vassar Athletics Completes Record-Breaking Day of Giving Campaign",
    "url": "https://vassarathletics.com/news/2025/10/15/general-vassar-athletics-completes-record-breaking-day-of-giving-campaign.aspx",
-   "squad": "Women's"
-  },
-  {
-   "date": "2025-10-05",
-   "title": "Women’s Rowing Competes At Head Of The Riverfront",
-   "url": "https://vassarathletics.com/news/2025/10/5/womens-rowing-womens-rowing-competes-at-head-of-the-riverfront.aspx",
    "squad": "Women's"
   }
  ],
