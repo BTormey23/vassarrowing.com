@@ -99,7 +99,7 @@
       cWrap.appendChild(div);
       if (checks && code !== 'EB') { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="' + esc(name) + '"> <span>' + esc(name) + '</span>'; checks.appendChild(lab); }
     });
-    if (checks) { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="Cohort captain for my decade (Brewer Day)"> <span>Cohort captain for my decade (Brewer Day)</span>'; checks.appendChild(lab); }
+    if (checks) { const lab = document.createElement('label'); lab.innerHTML = '<input type="checkbox" value="Cohort captain for my decade (#Give2Brew)"> <span>Cohort captain for my decade (#Give2Brew)</span>'; checks.appendChild(lab); }
   }
   const vf = document.getElementById('vf');
   if (vf) {
@@ -124,14 +124,27 @@
   // update form → prepared email text (the live site will post to a form service instead)
   const f = document.getElementById('f'), out = document.getElementById('out'), body = document.getElementById('body');
   const v = id => document.getElementById(id).value.trim();
+  // who is filling this in: rowers get class year + squad/side/seasons; everyone else names the rower who connects them
+  const typeEl = document.getElementById('f-type');
+  const isRower = () => typeEl.value === 'Vassar Rowing alum' || typeEl.value === 'Current rower';
+  function syncType(){
+    const r = isRower();
+    document.getElementById('f-rowing-wrap').hidden = !r;
+    document.getElementById('f-link-wrap').hidden = r;
+    document.getElementById('f-year').closest('label').firstChild.textContent = r ? 'Class Year' : "Rower's Class Year";
+  }
+  typeEl.addEventListener('change', syncType); syncType();
   f.addEventListener('submit', e => {
     e.preventDefault();
+    const rower = isRower();
     const lines = ['Vassar Rowing roster update', '',
-      'Name: ' + v('f-name'), 'Class year: ' + v('f-year'), 'Squad: ' + v('f-squad'), 'Side: ' + v('f-side'),
-      'Seasons rowed: ' + v('f-seasons'), 'Email: ' + v('f-email'), 'Phone: ' + v('f-phone'), '', v('f-note')];
+      'Name: ' + v('f-name'), 'I am a: ' + v('f-type'),
+      rower ? 'Class year: ' + v('f-year') : 'Connected to rower: ' + v('f-link') + (v('f-year') ? ' (class of ' + v('f-year') + ')' : ''),
+      rower ? 'Squad: ' + v('f-squad') : null, rower ? 'Side: ' + v('f-side') : null, rower ? 'Seasons rowed: ' + v('f-seasons') : null,
+      'Email: ' + v('f-email'), 'Phone: ' + v('f-phone'), '', v('f-note')].filter(x => x !== null);
     const txt = lines.join('\n');
     body.textContent = txt;
-    document.getElementById('mailto').href = 'mailto:' + document.getElementById('addr').textContent + '?subject=' + encodeURIComponent('Roster update – Class of ' + v('f-year')) + '&body=' + encodeURIComponent(txt);
+    document.getElementById('mailto').href = 'mailto:' + document.getElementById('addr').textContent + '?subject=' + encodeURIComponent(rower ? 'Roster update – Class of ' + v('f-year') : 'Add me – ' + v('f-type')) + '&body=' + encodeURIComponent(txt);
     out.classList.add('show'); out.scrollIntoView({behavior:'smooth', block:'nearest'});
   });
   document.getElementById('copy').addEventListener('click', function(){

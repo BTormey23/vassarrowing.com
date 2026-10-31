@@ -45,11 +45,11 @@
   <div class="wrap">
     <span class="eyebrow">What this is</span>
     <h2 style="margin-top:10px">An alumni effort, organized by rowers, for the program</h2>
-    <p class="lede" style="margin-top:14px">Vassar Rowing alumni coming together to strengthen the team for the long row. The work, like a shell, is lighter with &ldquo;All Hands On&rdquo;: Stay connected; Attend the Annual Alum Rowing Regatta; Give on Brewer Day; &amp; Build an Endowment that supports the VC Rowing legacy.</p>
+    <p class="lede" style="margin-top:14px">Vassar Rowing alumni coming together to strengthen the team for the long row. The work, like a shell, is lighter with &ldquo;All Hands On&rdquo;: Stay connected; Attend the Annual Alum Rowing Regatta; Give on #Give2Brew, the Athletics Day of Giving; &amp; Build an Endowment that supports the VC Rowing legacy.</p>
     <div class="pillars">
       <div class="pillar"><strong>Stay Connected</strong><span>A living roster of everyone who rowed here, by class year, so no one loses track of their boat.</span></div>
       <div class="pillar"><strong>Row Together</strong><span>The fall alumni regatta, launched in 2025, brings alumni and the current team onto the same water.</span></div>
-      <div class="pillar"><strong>Brewer Day</strong><span>Class cohorts rally each other for Vassar's day of giving. Friendly rivalry, real dollars for the team.</span></div>
+      <div class="pillar"><strong>#Give2Brew</strong><span>Class cohorts rally each other for the Athletics Day of Giving every October. Friendly rivalry, real dollars for the team.</span></div>
       <div class="pillar"><strong>The Endowment</strong><span>A permanent fund whose annual draw pays for coaching capacity the program has never had.</span></div>
     </div>
   </div>
@@ -193,7 +193,7 @@
           <label>Email<input id="v-email" type="email" autocomplete="email"></label>
         </div>
         <fieldset class="checks grid-3x3" id="v-checks"><legend>Committees I'd join</legend></fieldset>
-        <label>Anything Else<textarea id="v-note" placeholder="What you'd like to help with, or that you'd captain your decade for Brewer Day"></textarea></label>
+        <label>Anything Else<textarea id="v-note" placeholder="What you'd like to help with, or that you'd captain your decade for #Give2Brew"></textarea></label>
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
           <button class="btn btn-primary" type="submit">Prepare my note</button>
           <span class="privacy">Goes only to the alumni organizers. Contact details and notes/details remain private, not published.</span>
@@ -211,14 +211,18 @@
 <section class="block" id="update">
   <div class="wrap">
     <span class="eyebrow">Update my info</span>
-    <h2 style="margin-top:10px">Add yourself, or a teammate</h2>
-    <p class="lede" style="margin-top:14px">Two minutes. This is how the roster gets better and how you hear about the regatta.</p>
+    <h2 style="margin-top:10px">Add yourself, a teammate, or someone who loves this team</h2>
+    <p class="lede" style="margin-top:14px">Two minutes. This is how the roster gets better and how you hear about the regatta. Parents, family, friends of the program, and neighbors on the river are welcome here too: tell us who you are and which rower connects you.</p>
     <form class="form" id="f" novalidate>
       <div class="grid2">
         <label>Name<input id="f-name" type="text" autocomplete="name" placeholder="First and last (and maiden name if it changed)"></label>
-        <label>Class Year<input id="f-year" type="number" inputmode="numeric" placeholder="2002"></label>
+        <label>I am a&hellip;<select id="f-type"><option>Vassar Rowing alum</option><option>Current rower</option><option>Parent or family of a rower</option><option>Friend of the program</option><option>Local rowing community (HRRA, MHRA, area programs)</option><option>Coach or staff</option></select></label>
       </div>
-      <div class="grid3">
+      <div class="grid2" id="f-rower-wrap">
+        <label>Class Year<input id="f-year" type="number" inputmode="numeric" placeholder="2002"></label>
+        <label id="f-link-wrap" hidden>Rower you're connected to<input id="f-link" type="text" placeholder="Name and class year, e.g. Jane Doe '02"></label>
+      </div>
+      <div class="grid3" id="f-rowing-wrap">
         <label>Squad<select id="f-squad"><option value="">Choose</option><option>Men's</option><option>Women's</option></select></label>
         <label>Side<select id="f-side"><option value="">Choose</option><option>Port</option><option>Starboard</option><option>Coxswain</option><option>Both</option></select></label>
         <label>Seasons Rowed<input id="f-seasons" type="text" placeholder="e.g. 1998–2000"></label>
